@@ -1,0 +1,228 @@
+/* You can add global styles to this file, and also import other style files */
+
+.pointer {
+  cursor: pointer;
+}
+
+svg-icon path:hover {
+  fill: #fff;
+}
+
+svg-icon svg {
+  width: 3.00vw !important;
+  height: 3.65vw !important;
+}
+
+#icon svg{
+  width: 1.65vw !important;
+  height: 1.65vw !important;
+  margin-bottom: -10px !important;   
+}
+
+div .ui-dialog-title{
+  font-size: medium !important;
+  font-weight: 100 !important;
+  color: #000066 !important;
+}
+.ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top{
+  background: #b5c1cf !important;
+  border-bottom: 2px solid #5b619b !important;
+  padding-bottom: 1% !important;
+}
+.ui-dialog{
+  border: 2px solid #5b619b !important;
+  border-radius: 1% !important;
+   background: #ced5dc !important;
+} 
+.ui-widget-content.content-align{
+  background: #ced5dc ;
+}
+.ui-panel.ui-widget.ui-widget-content.ui-corner-all{
+  border: 2px solid #5b619b !important;
+}
+.ui-panel-content.ui-widget-content{
+  background: #ced5dc !important;
+}
+.ui-panel-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-all{
+  border-bottom: 2px solid #5b619b !important;
+}
+.ui-panel-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-all{
+      background: #b5c1cf !important;
+}
+.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix{
+      border-top: 2px solid #ced5dc !important;
+}
+.ui-dialog-footer{
+      background: #ced5dc !important;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #B5C1CF;
+  border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+  background-color: #B5C1CF;
+  border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  cursor: pointer;
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.44,#435C77),
+									   color-stop(0.72, #435C77),
+									   color-stop(0.86, #435C77));
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.44,#6b7f9a),
+									   color-stop(0.72, #6b7f9a),
+									   color-stop(0.86, #6b7f9a));
+}
+
+  /* for formbuilder */
+ .form-control{
+        border-radius: 5px !important;
+    font-size: 1.04vw !important;
+    line-height: 2.60vw !important;
+    height: 34px  ;
+    text-align: left !important;
+    padding: 0 10px !important;
+    width: 100% !important;
+    border: 2px solid #164f86 !important;
+    color: #1e384f !important;
+    background: #ebebeb !important;
+    transition: all 0.2s !important;
+    display: inline-block !important;
+    position: relative !important;
+    vertical-align: middle !important;
+} 
+ label{
+   color: #3d556c  ;
+    font-weight: 500 !important;
+    font-size: 1vw !important;
+
+} 
+
+
+.form-field-type-panel{
+        border: 2px solid #5b619b !important;
+}
+
+
+.formio-loader{
+   display: none !important;
+}
+.panel-default{
+    margin: 0 0 20px;
+    border: 3px solid #9dadbf;
+    background: #d0d7df;
+    border-radius: 6px;
+}
+.panel-heading{
+    font-size: 1.3vw;
+    font-weight: 500;
+    color: #164f86 !important;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: #9DADBF !important;
+}
+legend{
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin-bottom: 21px !important;
+    font-size: 22.5px !important;
+    line-height: inherit !important;
+    color: #333333 !important;
+    border: 0 !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+}
+.row{
+  margin:0px !important;
+}
+.ui-dialog-footer{
+  border-top: 2px solid #5b619b !important
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.btn{
+  white-space: inherit !important;
+}
+
+.ui-dropdown label.ui-dropdown-label{
+  color: #4B596C;
+}
+
+.ui-calendar.ui-calendar-w-btn input{
+    color: #4B596C !important;
+}
+
+
+.ui-calendar-w-btn{
+ width:90% ;
+ margin-right: 11%;
+}
+span.ng-tns-c8-6.ui-calendar.ui-calendar-w-btn {
+    width: 120%;
+}
+.ui-calendar-w-btn > .ui-inputtext{
+      padding-bottom: 2% !important;
+}
+span.ui-button-icon-left.ui-clickable.fa.fa-fw.fa-plus {
+    text-align: center !important;
+    padding-right: 9% !important;
+}
+
+span.ui-button-icon-left.ui-clickable.fa.fa-fw.fa-minus{
+  text-align: center !important;
+    padding-right: 9% !important;
+}
+span.ng-tns-c8-38.ui-calendar.ui-calendar-w-btn {
+    width: 120% !important;
+}
+
+span.ng-tns-c12-4.ui-calendar.ui-calendar-w-btn {
+    width: 124% !important;
+}
+span.ng-tns-c8-5.ui-calendar.ui-calendar-w-btn{
+  width:120% !important;
+}
+span.ng-tns-c8-13.ui-calendar.ui-calendar-w-btn{
+  width:117% !important;
+}
+span.ng-tns-c11-4.ui-calendar.ui-calendar-w-btn {
+    width: 121%!important;
+}
+
+
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-success{
+  background-color: #4CAF50 !important;
+    border-color: #4CAF50 !important;
+}
+
+.ui-autocomplete-input-token{
+      margin: -3px !important; 
+    padding: 0 !important; 
+    background-color: #EBEBEB !important;
+}
+  
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button{
+  background-color: #EBEBEB !important;
+}
+
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
+      margin: 6px 3px 5px 2px;
+}
+
+

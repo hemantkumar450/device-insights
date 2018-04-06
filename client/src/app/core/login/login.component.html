@@ -1,0 +1,43 @@
+<div class="top">
+  <p-growl [(value)]="messages" [immutable]="false" life="7000"></p-growl>
+  <div class="top__in" style="padding-top: 25px">
+    <a href="#" class="top__logo">
+      <img src="./assets/images/logo.png" alt="" style="height: 70px;"></a>
+  </div>
+</div>
+<div class="login-screen">
+  <form class="form-block">
+    <div class="flex-block flex-column align-center">
+      <div class="block p-t-10">
+        <div class="title">
+          {{message}}
+        </div>
+      </div>
+      <div class="block p-t-10">
+      </div>
+      <div class="block p-t-10">
+        <input type="text" class="field w-320" name="username" placeholder="UserName" [(ngModel)]="model.UserName" />
+      </div>
+      <div class="block p-t-10">
+        <input type="password" class="field w-320" name="password" placeholder="Password" [(ngModel)]="model.Password" />
+      </div>
+      <div class="block p-t-10">
+        <button [disabled]="loading" class="btn w-320 h-60" (click)="login()">Login</button>
+      </div>
+      <div class="block p-t-10">
+        <div class="w-320 muted">
+          <!-- <a (click)="routeForReset()" style="font-size: 15px;">Forgot password?</a> -->
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="login-footer">
+    <a href="tel:614-495-0260" class="phone">614-495-0260</a> |
+    <a href="#" class="email">deviceinsights.io</a>
+  </div>
+</div>
+<div class="top">
+  <div class="top__in" style="padding-top: 10px;padding-bottom: 10px;padding-left: 30px;background-color: white;">
+    <!--<a href="http://molecularinsights.io/" class="top__logo"><img src="../assets/images/mi_logo.png" alt=""></a>-->
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.mCSB_scrollTools {
+  .mCSB_draggerRail {
+    background: #9cadbf;
+    width: 4px;
+  }
+
+  .mCSB_dragger {
+    .mCSB_dragger_bar {
+      background-color: #6b7f9a;
+      filter: "alpha(opacity=90)";
+      -ms-filter: "alpha(opacity=90)";
+      width: 10px;
+    }
+    &:hover {
+      .mCSB_dragger_bar {
+        background-color: #435c77;
+      }
+    }
+  }
+}
+.mCSB_container_wrapper > .mCSB_container {
+  padding-right: 0;
+}
+.mCSB_container.mCS_no_scrollbar_y.mCS_y_hidden {
+  margin-right: $scrollbar-offset;
+}
+.mCSB_inside > .mCSB_container {
+    margin-right: 20px;
+}
+.mCSB_container.mCS_no_scrollbar_y.mCS_y_hidden {
+    margin-right: 20px;
+}

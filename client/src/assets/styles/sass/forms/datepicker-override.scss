@@ -1,0 +1,33 @@
+.moment-picker {
+  .moment-picker-container {
+    background: $extra-light-gray;
+    font-family: $font-family;
+    border: 2px solid $normal-blue;
+    box-shadow: 1px 1px 9px $normal-blue;
+    padding: 0;
+    margin-left: 0;
+
+    .header-view {
+      background: $dark-gray;
+      border-bottom: 2px solid $normal-blue;
+      color: $black-blue;
+    }
+
+    &:after, &:before {
+      display: none;
+    }
+  }
+  td, th {
+    vertical-align: middle;
+    text-shadow: none;
+    font-weight: 500;
+
+    &:hover {
+      background: inherit;
+    }
+  }
+  td.selected {
+    background: $heavy-gray;
+    border-color: $heavy-gray;
+  }
+}

@@ -1,0 +1,294 @@
+<p-growl [(value)]="errorMessage" [immutable]="false" life="7000"></p-growl>
+<div class="flex-block site-content">
+  <quality-control-left-navbar></quality-control-left-navbar>
+  <div class="main-content">
+    <div class="content" scroll-bar>
+      <error></error>
+      <div class="flex-block">
+        <div class="block grow-100 m-r-10 edit-mode">
+          <div class="content-block flex-block flex-wrap">
+
+            <div class="labeled-block block grow-12 offset-right">
+              <div class="label">Instrument</div>
+              <div class="value">
+                <p-dropdown [filter]="true" name="instruments" placeholder='Please Select' [options]="instruments" [(ngModel)]="instrumentId"
+                  (onChange)=getCompoundDDO()></p-dropdown>
+              </div>
+            </div>
+
+            <div class="labeled-block block grow-01 offset-right">
+            </div>
+
+            <div class="labeled-block block grow-08 offset-right">
+              <div class="label">Year</div>
+              <div class="value">
+                <p-dropdown [filter]="true" name="Year" placeholder='Please Select' [options]="yearArray" [(ngModel)]="yearId" (onChange)=getBatches(true)></p-dropdown>
+              </div>
+            </div>
+
+            <div class="labeled-block block grow-01 offset-right">
+            </div>
+
+            <div class="labeled-block block grow-08 offset-right">
+              <div class="label">Month</div>
+              <div class="value">
+                <p-dropdown [filter]="true" name="Month" placeholder='Please Select' [options]="monthArray" [(ngModel)]="monthId" (onChange)=getBatches(true)></p-dropdown>
+              </div>
+            </div>
+
+            <div class="labeled-block block grow-01 offset-right">
+            </div>
+
+            <div class="labeled-block block grow-07 offset-right">
+              <div class="label">Day</div>
+              <div class="value">
+                <p-dropdown [filter]="true" name="Month" placeholder='Please Select' [options]="dayArray" [(ngModel)]="dayId" (onChange)=getBatches(true)></p-dropdown>
+              </div>
+            </div>
+
+            <div class="labeled-block block grow-01 offset-right">
+            </div>
+
+
+            <div class="labeled-block block grow-11 offset-right">
+              <div class="label">Batch</div>
+              <div class="value">
+                <p-dropdown [filter]="true" name="batch" placeholder='Please Select' [options]="batches" [(ngModel)]="batchId" (onChange)=getBatches(false)></p-dropdown>
+              </div>
+            </div>
+
+            <div class="labeled-block block grow-01 offset-right">
+            </div>
+
+            <div class="labeled-block block grow-12 offset-right">
+              <div class="label">Compound</div>
+              <div class="value">
+                <p-dropdown [filter]="true" name="compound" placeholder='Please Select' [options]="compounds" [(ngModel)]="compoundId" (onChange)=getBatches(false)></p-dropdown>
+              </div>
+            </div>
+
+            <div class="labeled-block block grow-01 offset-right">
+            </div>
+
+            <div class="labeled-block block grow-07 offset-right">
+              <div class="label">Overall Status</div>
+              <div class="value">
+                <p-dropdown [filter]="true" name="status" placeholder='Please Select' [options]="statusArray" [(ngModel)]="status" (onChange)=getBatches(false)></p-dropdown>
+              </div>
+            </div>
+
+            <div class="labeled-block block grow-01 offset-right">
+            </div>
+
+            <div class="labeled-block block grow-14 offset-right" *ngIf="batchId !=0 && batchId !=='All' && !batchReviewed">
+              <div class="value">
+                <button style="margin-top: 15px;font-size: small;padding: 0 6px 0px 6px;" type="submit" class="btn btn-dark h-50 m-l-20"
+                  (click)="setBatchStatus()">Update Status</button>
+              </div>
+            </div>
+
+            <div class="labeled-block block grow-14 offset-right" *ngIf="batchId !=0 && batchId !=='All' && !batchReviewed">
+              <div class="value">
+                <button style="margin-top: 15px;font-size: small;padding: 0 6px 0px 6px;" type="submit" class="btn btn-dark h-50 m-l-20"
+                  (click)="deleteBatch()">Delete Batch</button>
+              </div>
+            </div>
+
+            <div class="labeled-block block grow-14 offset-right" *ngIf="batchId !=0 && batchId !=='All' && !batchReviewed">
+              <div class="value">
+                <button style="margin-top: 15px;font-size: small;padding: 0 6px 0px 6px;" type="submit" class="btn btn-dark h-50 m-l-20"
+                  (click)="reviewBatchDialogEvent()">Confirm Review</button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-block">
+        <div class="titled-block block grow-1">
+          <p-dataTable [value]="results" scrollable="true" [paginator]="false" [rows]="pageSize" [responsive]="true" (onSort)="onSorting($event)"
+            (onFilter)="onFiltering($event)" scrollHeight="282%">
+            <p-column field="COMP_NAME" header="Compound" [style]="{'width':'10%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <span style="font-size: medium;">
+                  <b>{{result.COMP_NAME}}</b>
+                </span>
+              </ng-template>
+            </p-column>
+            <p-column field="BATCH_ID" header="Batch No" [style]="{'width':'6%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <span style="font-size: small;">
+                  <b>{{result.BATCH_ID}}</b>
+                </span>
+              </ng-template>
+            </p-column>
+            <p-column field="LOW" header="Low" [style]="{'width':'4.5%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <span style="font-size: medium;">
+                  <b>{{result.LOW}}</b>
+                </span>
+              </ng-template>
+            </p-column>
+            <p-column header="Status" [style]="{'width':'5.8%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <div>
+                  <span *ngIf="result.LOW_STATUS !== 'null' && result.LOW_STATUS" style="font-size:medium;">{{result.LOW_STATUS}}</span>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column field="MID" header="Mid" [style]="{'width':'4.5%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <span style="font-size:medium;">
+                  <b>{{result.MID}}</b>
+                </span>
+              </ng-template>
+            </p-column>
+            <p-column header="Status" [style]="{'width':'5.8%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <div>
+                  <span *ngIf="result.MID_STATUS !== 'null' && result.MID_STATUS" style="font-size:medium;">{{result.MID_STATUS}}</span>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column field="HIGH" header="High" [style]="{'width':'5%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <span style="font-size:medium;">
+                  <b>{{result.HIGH}}</b>
+                </span>
+              </ng-template>
+            </p-column>
+            <p-column header="Status" [style]="{'width':'5.8%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <div>
+                  <span *ngIf="result.HIGH_STATUS !== 'null' && result.HIGH_STATUS" style="font-size:medium;">{{result.HIGH_STATUS}}</span>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column field="END" header="End" [style]="{'width':'4.5%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <span style="font-size: medium;">
+                  <b>{{result.END}}</b>
+                </span>
+              </ng-template>
+            </p-column>
+            <p-column header="Status" [style]="{'width':'5.8%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <div>
+                  <span *ngIf="result.END_STATUS !== 'null' && result.END_STATUS" style="font-size:medium;">{{result.END_STATUS}}</span>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column header="Overall Status" [style]="{'width':'6.5%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <div>
+                  <div style="font-size:medium;">
+                    <span *ngIf="result.OVERALL_STATUS === true">Pass</span>
+                    <span *ngIf="result.OVERALL_STATUS === false">Fail</span>
+                  </div>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column header="Reason" [style]="{'width':'6%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <p-dropdown [filter]="true" appendTo="body" name="locations" placeholder='Please Select' [options]="reasons" [(ngModel)]="result.REASON_ID"
+                  *ngIf="result.isEdit">
+                </p-dropdown>
+                <span *ngIf="!result.isEdit && result.REASON_ID !==0" style="font-size:medium;" pTooltip="Click on reason tab for more detail"
+                  tooltipPosition="top">{{result.REASON_ID}}</span>
+              </ng-template>
+            </p-column>
+            <p-column header="Reviewed By" [style]="{'width':'8%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <span style="font-size:medium;">{{result.USER_NAME}}</span>
+              </ng-template>
+            </p-column>
+            <p-column header="CMNT" style="font-size:x-small;" [style]="{'width':'6%'}">
+              <ng-template let-result="rowData" pTemplate="body">
+                <span *ngIf="result.COMMENT" style="font-size:x-small;" pTooltip="{{result.COMMENT}}" tooltipPosition="top">
+                  {{result.COMMENT | truncate: 10}} {{result.COMMENT > 10 ? '...' : ''}}
+                </span>
+              </ng-template>
+            </p-column>
+            <p-column styleClass="col-button" header="Actions" [style]="{'width':'8.5%'}">
+              <ng-template let-compound="rowData" pTemplate="body">
+                <div *ngIf="!compound.USER_NAME || isAdmin">
+                  <span style="color: green;" *ngIf="compound.isEdit == true" pTooltip="Save" class="cursor-pointer" (click)="saveResult(compound)">
+                    <i class="fa fa-floppy-o fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+
+                  <span *ngIf="compound.isEdit != true && !compound.USER_NAME" class="cursor-pointer" (click)="editResult(compound)">
+                    <i class="fa fa-pencil fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+
+                  <span *ngIf="compound.isEdit == true">|</span>
+
+                  <span style="color: red;" *ngIf="compound.isEdit == true" pTooltip="Cancel" class="cursor-pointer" (click)="cancelResult(compound)">
+                    <i class="fa fa-times fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+
+                  <span *ngIf="compound.isEdit == true">|</span>
+
+
+                  <span style="color: blue;" *ngIf="compound.isEdit == true" pTooltip="Reset" class="cursor-pointer" (click)="resetReason(compound)">
+                    <i class="fa fa-refresh fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+
+                </div>
+              </ng-template>
+            </p-column>
+          </p-dataTable>
+          <p-paginator [hidden]="totalRecords<pageSize" [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="pageChanged($event)"></p-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer site-container">
+  <div class="flex-block space-between">
+    <div class="flex-block">
+
+    </div>
+    <div class="flex-block block">
+      <div class="block" style="margin-top:1%">
+        <h1 style="color:white">Total Records: {{totalRecords}}</h1>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Cancel" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Ok" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+
+<p-dialog header=" I confirm the review of Batch {{batchId}}" [(visible)]="isReviewBatch" modal="modal" width="600" [responsive]="true">
+  <div class="block grow-50 m-r-20" style="height: 230px;">
+    <div class="content-block flex-block flex-wrap">
+      <div class="labeled-block block grow-1 offset-right">
+        <div class="text-danger">You could give comment for future reference before to review this batch.</div>
+      </div>
+      <div class="labeled-block block grow-1 offset-right edit-mode">
+        <div class="labeled-block block grow-20 offset-right" style="float: left;padding-top: 10px;">
+          <div class="label required">Comments:</div>
+        </div>
+        <div class="labeled-block block grow-80 offset-right" style="float: left">
+          <div class="value">
+            <textarea pInputTextarea [(ngModel)]="comment" rows="5" cols="40" maxlength="100"></textarea>
+            <div class="label">
+              comment should not be more than 100 words.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-footer class="ui-dialog-buttonpane">
+    <button type="button" pButton icon="fa-close" (click)="reviewBatchDialogEvent()" label="Cancel"></button>
+    <button type="button" pButton icon="fa-check" (click)="reviewBatch()" label="Review"></button>
+  </p-footer>
+</p-dialog>

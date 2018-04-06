@@ -1,0 +1,56 @@
+<p-growl [(value)]="errorMessage" [immutable]="false" life="7000"></p-growl>
+<div class="flex-block site-content">
+  <smart-lab-left-navbar></smart-lab-left-navbar>
+  <div class="main-content">
+    <div class="content" scroll-bar>
+      <error></error>
+      <div class="flex-block">
+        <div class="block grow-10"></div>
+        <div class="titled-block block grow-70">
+          <p-dataTable [value]="devices" scrollable="true" [paginator]="false" [rows]="pageSize" [responsive]="true" (onSort)="onSorting($event)"
+            (onFilter)="onFiltering($event)">
+            <p-column field="SENSOR_FACTORY_ID" header="Sensor Factory Id" [style]="{'width':'6%'}"></p-column>
+            <p-column field="SENSOR_FACTORY_CODE" header="Sensor Code" [style]="{'width':'6%'}"></p-column>
+            <p-column field="UPPER_LIMIT" header="Upper Limit" [style]="{'width':'6%'}"></p-column>
+            <p-column field="LOWER_LIMIT" header="Lower Limit" [style]="{'width':'6%'}"></p-column>
+            <p-column field="LOCATION_ID" header="Location" [style]="{'width':'10%'}"></p-column>
+            <p-column field="SENSOR_TYPE_ID" header="Sensor Type" [style]="{'width':'8%'}"></p-column>
+            <p-column styleClass="col-button" [style]="{'width':'6%'}" header="Actions" *ngIf="isLabAdmin || isAppAdmin">
+              <ng-template let-device="rowData" pTemplate="body">
+                <div>
+                  <span  (click)="editDevice(device.SENSOR_ID)" class="cursor-pointer">
+                    <i class="fa fa-pencil fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+                  <span *ngIf="isAppAdmin">|</span>
+                  <span *ngIf="isAppAdmin" (click)="deleteDeviceById(device.SENSOR_ID)" class="cursor-pointer">
+                    <i class="fa fa-trash fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </ng-template>
+            </p-column>
+          </p-dataTable>
+          <p-paginator [hidden]="totalRecords<pageSize" [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="pageChanged($event)"></p-paginator>
+        </div>
+        <div class="block grow-20"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer site-container">
+  <div class="flex-block space-between">
+    <div class="flex-block">
+      <!--pagination here-->
+    </div>
+    <div class="flex-block block">
+      <div class="block" style="margin-top:1%">
+        <h1 style="color:white">Total Devices: {{totalRecords}}</h1>
+      </div>
+      <div class="delim m-l-30" *ngIf="isAppAdmin"></div>
+      <a class="btn btn-light h-50 m-l-20" (click)="addDevice()" *ngIf="isAppAdmin">Add Device</a>
+    </div>
+  </div>
+</footer>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

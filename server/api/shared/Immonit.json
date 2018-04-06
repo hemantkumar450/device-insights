@@ -1,0 +1,10 @@
+{
+	"protocol":"https",
+	"hostname":"www.imonnit.com",
+	"loginPath":"/json/GetAuthToken?",
+	"loginSuccess":"/json/Logon/",
+	"sensorGetPath":"/json/SensorGet/",
+	"username":"rajneesh.katarapu",
+	"password":"Ubuntu9M"
+}
+

@@ -1,0 +1,58 @@
+.switch {
+  $bg-color: #b6c1cf;
+  $font-color: #a3b1bf;
+  $bg-on: #3d556c;
+  $bg-off: #8592a2;
+  // $total-width: 140;
+  // $total-height: 50;
+  $total-width: 6vw;
+  $total-height: 2vw;
+  $border-width: 4;
+
+  width: #{$total-width};
+  height: #{$total-height};
+  line-height: #{$total-height - 2*$border-width};
+  font-size: $font-size-25;
+  position: relative;
+  display: inline-block;
+
+  border: #{$border-width}px solid $bg-color;
+  border-radius: 5px;
+  background-color: $bg-color;
+  color: $font-color;
+  font-weight: bold;
+  text-align: center;
+  transition: .2s;
+
+  &:hover {
+    box-shadow: 1px 1px 9px $bg-on;
+  }
+
+  input {display:none;}
+
+  .switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &:before {
+      position: absolute;
+      content: attr(data-off);
+      width: 50%;
+      left: 0;
+      bottom: 0;
+      background-color: $bg-off;
+      transition: .2s;
+      border-radius: 4px;
+    }
+  }
+
+  input:checked + .switch-slider:before {
+    transform: translateX(100%);
+    content: attr(data-on);
+    background-color: $bg-on;
+  }
+}

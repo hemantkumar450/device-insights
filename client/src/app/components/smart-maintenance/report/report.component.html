@@ -1,0 +1,108 @@
+<p-growl [(value)]="errorMsg" [immutable]="false" life="7000"></p-growl>
+<div class="flex-block site-content">
+    <smart-maintenance-left-navbar></smart-maintenance-left-navbar>
+    <div class="main-content">
+        <div class="content" scroll-bar>
+            <error></error>
+
+            <div class="flex-block">
+                <div class="block grow-10"></div>
+                <div class="block grow-100 m-r-10 edit-mode">
+                    <div class="content-block flex-block flex-wrap">
+
+                        <div class="labeled-block block grow-12 offset-right">
+                            <div class="label">Month</div>
+                            <div class="value">
+                                <p-dropdown #dropDownThing [filter]="true" name="month" placeholder='Please Select' [(ngModel)]="monthId" [options]="monthArray"
+                                    (onChange)=getReport()></p-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="labeled-block block grow-10 offset-right">
+                            <div class="label">Year</div>
+                            <div class="value">
+                                <p-dropdown #dropDownThing [filter]="true" name="year" placeholder='Please Select' [(ngModel)]="yearId" [options]="yearArray"
+                                    (onChange)=getReport()></p-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="labeled-block block grow-15 offset-right">
+                            <div class="label">Instrument</div>
+                            <div class="value">
+                                <p-dropdown #dropDownThing [filter]="true" name="instruments" placeholder='Please Select' [(ngModel)]="instrumentId" [options]="instruments"
+                                    (onChange)=getReport()></p-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="labeled-block block grow-15 offset-right">
+                            <div class="label">Frequency</div>
+                            <div class="value">
+                                <p-dropdown #dropDownThing [filter]="true" name="frequencies" placeholder='Please Select' [(ngModel)]="freqId" [options]="frequencies"
+                                    (onChange)=getReport()></p-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="labeled-block block grow-20 offset-right">
+                            <div class="value">
+                                <button style="margin-top: 15px;" type="submit" class="btn btn-dark h-50 m-l-20" (click)="reportGenerate()">Report Generate</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-block">
+                <div class="block grow-08"></div>
+                <div class="titled-block block grow-70">
+                    <p-dataTable [value]="reportArray" scrollable="true" [paginator]="false" [rows]="pageSize" [responsive]="true" (onSort)="onSorting($event)"
+                        (onFilter)="onFiltering($event)" scrollHeight="400px">
+
+                        <p-column header="S.No" [style]="{'width':'25%'}">
+                            <ng-template let-report="rowData" let-index="rowIndex" pTemplate="body">
+                                <span>{{index+1}}</span>
+                            </ng-template>
+                        </p-column>
+
+                        <p-column header="Frequency Name" [style]="{'width':'25%'}">
+                            <ng-template let-report="rowData" pTemplate="body">
+                                <span>{{report.FREQ_NAME}}</span>
+                            </ng-template>
+                        </p-column>
+
+                        <p-column header="Instrument Name" [style]="{'width':'25%'}">
+                            <ng-template let-report="rowData" pTemplate="body">
+                                <span>{{report.INSTR_NAME}}</span>
+                            </ng-template>
+                        </p-column>
+
+                        <p-column header="Report" [style]="{'width':'25%'}">
+                            <ng-template let-report="rowData" pTemplate="body">
+                                <span (click)="openPdf(report)">
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                </span>
+                            </ng-template>
+                        </p-column>
+
+                    </p-dataTable>
+                    <p-paginator [hidden]="totalRecords<pageSize" [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="pageChanged($event)"></p-paginator>
+                </div>
+                <div class="block grow-20"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer site-container">
+    <div class="flex-block space-between">
+        <div class="flex-block">
+        </div>
+        <div class="flex-block block">
+            <div class="block" style="margin-top:1%">
+                <h1 style="color:white">Total Records: {{totalRecords}}</h1>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

@@ -1,0 +1,173 @@
+
+ #all {
+    width: 170px;
+    height: 150px;
+    background: #6986A8;
+    border-radius: 77px;
+}
+ #prefered {
+    width: 170px;
+    height: 150px;
+    background: #21BB9F;
+    border-radius: 77px;
+}
+ #billing {
+    width: 170px;
+    height: 150px;
+    background: #8167BB;
+    border-radius: 77px;
+}
+ #processing {
+    width: 170px;
+    height: 150px;
+    background: #EA0A2A;
+    border-radius: 77px;
+}
+ #sendout {
+    width: 170px;
+    height: 150px;
+    background: #9B9D9C;
+    border-radius: 77px;
+}
+p{
+  text-align: center;
+  /* padding-top: 34%; */
+  font-size: 15px;
+    color: white;
+}
+
+.btn-selected{
+    background-color: #1598C8;
+}
+
+.btn-unSelected{
+    background-color: #A09C9C;
+}
+
+.paddding-top30{
+    padding-top: 30px;
+}
+
+.paddding-top0{
+    padding-top: 0px;
+}
+
+.numberStyle{
+    font-size: xx-large;
+}
+
+.cursorView{
+    cursor: pointer;
+}
+
+
+
+/*design boxes  */
+
+.img{
+    margin-left: 5px;
+    height: 50px;
+    width: 60px;
+}
+
+
+.shadow{
+   box-shadow:2px 2px 10px 10px #888888; 
+  /* box-shadow: 10px 10px 5px #888888 !important; */
+  /* -webkit-box-shadow:2px 1px 20px 8px #888888; */
+  -webkit-box-shadow: 1px 1px 10px 5px #888888;
+ -moz-box-shadow:2px 2px 10px 10px #888888; 
+}
+
+.labBottleImage {
+    height: 61px;
+    margin-top: 39px;
+    padding-left: 142%;
+}
+
+.topPTag {
+    color: #fff;font-size: -webkit-xxx-large;font-family: adobe clean light;padding-left: 15%;
+}
+
+.qualityBlock {
+    border: #d3d3d3 solid 1px;
+    background-color: #EBA03C !important;
+    cursor: pointer;
+    opacity: 0.7;
+    margin-top: 1%;
+}
+
+.qualityPTag {
+    color: #fff;font-size: x-large;margin: 0;font-family: adobe clean light
+}
+
+.qualityImage {
+    height: 70px !important;
+    width: 70px !important;
+    margin-left: 5px !important;
+    margin-bottom: -18px !important;
+    margin-top: -7px !important;
+}
+
+.instrumentBlock {
+    border: #d3d3d3 solid 1px;
+    background-color: #519BAE;
+    /* margin-left: 45px; */
+    cursor: pointer;
+    /* height: 10%; */
+    opacity: 0.7;
+}
+
+.instrumentPTag {
+    color: #fff;font-size: x-large;margin: 0;font-family: adobe clean light;
+    margin-left: 5%;
+}
+
+.instrumentImage {
+    height: 84px !important;
+    width: 70px !important;
+    margin-left: 5px !important;
+    margin-bottom: -18px !important;
+    margin-top: -14px !important;
+}
+
+.smartLabBlock {
+    border: #d3d3d3 solid 1px; 
+    background-color: #868A8A;
+    cursor: pointer;
+    /* height: 10%; */
+    opacity: 0.7;
+    margin-top: 1%;
+}
+.smartPTag {
+    color: #fff;font-size: x-large;margin: 0;font-family: adobe clean light
+}
+
+.smartLabImage{
+    height: 62px !important;
+    width: 64px !important;
+    margin-left: 5px !important;
+    margin-bottom: -18px !important;
+    margin-top: -5px !important;
+}
+
+.analyticBlock {
+    border: #d3d3d3 solid 1px; 
+    background-color: #DC8468;
+    /* margin-left: 45px; */
+    cursor: pointer;
+    opacity: 0.7;
+    margin-top: 1%;
+}
+
+.analyticImage {
+    height: 66px  !important;
+    width: 67px !important;
+    margin-bottom: -9px !important;
+    margin-top: -6px !important;
+}
+
+.analyticPTag {
+    color: #fff;font-size: x-large;margin: 0;font-family: adobe clean light;
+    padding-top: 12%;    
+}

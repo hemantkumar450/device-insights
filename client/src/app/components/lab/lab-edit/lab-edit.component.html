@@ -1,0 +1,245 @@
+<p-growl [(value)]="errorMsg" [immutable]="false" life="7000"></p-growl>
+<form #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
+  <div class="flex-block site-content">
+    <lab-left-navbar></lab-left-navbar>
+    <div class="main-content">
+      <div class="content" scroll-bar>
+        <error></error>
+        <div class="flex-block ">
+          <div class="titled-block block grow-100 m-r-10 edit-mode">
+            <div class="title">Lab Information
+              <div style="float:right" *ngIf="lab.LAB_ID != 0">Is Active
+                <p-checkbox name="groupname" label="" binary="true" [(ngModel)]="lab.IS_ACTIVE"></p-checkbox>
+              </div>
+            </div>
+            <div class="content-block flex-block flex-wrap">
+              <div class="labeled-block block grow-30 offset-right">
+                <div class="label required">Name</div>
+                <div class="value required">
+                  <input name="Name" [(ngModel)]="lab.LAB_NAME" OnlyEntityName="true" maxlength="50" #nameValidate="ngModel" class="field"
+                    required />
+                </div>
+                <div [hidden]="nameValidate.pristine && !f.submitted && nameValidate.untouched">
+                  <div *ngIf="nameValidate.errors && nameValidate.errors.required" class="text-danger">
+                    Name is required
+                  </div>
+                </div>
+              </div>
+              <div class="labeled-block block grow-10 offset-right">
+                <div class="label">Latitude</div>
+                <div class="value">
+                  <input type="text" name="Latitude" maxlength="5" OnlyDecimalNumber="true" [(ngModel)]="lab.LATITUTE" class="field" />
+                </div>
+              </div>
+              <div class="labeled-block block grow-10 offset-right">
+                <div class="label">Longitude</div>
+                <div class="value">
+                  <input type="text" name="Longitude" maxlength="5" OnlyDecimalNumber="true" [(ngModel)]="lab.LONGITUTE" class="field" />
+                </div>
+              </div>
+              <div class="labeled-block block grow-40 offset-right">
+                <div class="label required">Module</div>
+                <div class="value required">
+                  <p-multiSelect [options]="modules" [(ngModel)]="lab.ModuleIds" #moduleValidate="ngModel" required name="modules"></p-multiSelect>
+                </div>
+                <div [hidden]="moduleValidate.pristine && !f.submitted && moduleValidate.untouched">
+                  <div *ngIf="moduleValidate.errors && moduleValidate.errors.required" class="text-danger">
+                    please select atleast one module
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="flex-block">
+          <div class="block grow-50 m-r-10">
+            <div class="titled-block block grow-1 m-r-10 edit-mode">
+              <div class="title" *ngIf="lab.LAB_ID == 0">Create Lab Owner Security</div>
+              <div class="title" *ngIf="lab.LAB_ID != 0">Update Lab Owner Security</div>
+              <div class="content-block flex-block flex-wrap">
+
+                <div class="labeled-block block grow-100 offset-right" *ngIf="lab.LAB_ID === 0">
+                  <div class="label required">First Name</div>
+                  <div class="value">
+                    <input type="text" maxlength="50" name="FirstName" [(ngModel)]="lab.User.FIRST_NAME" class="field" #FirstNameValidate="ngModel"
+                      required />
+
+                    <div [hidden]="FirstNameValidate.pristine && !f.submitted && FirstNameValidate.untouched">
+                      <div *ngIf="FirstNameValidate.errors && FirstNameValidate.errors.required" class="text-danger">
+                        First Name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="labeled-block block grow-50 offset-right" *ngIf="lab.LAB_ID === 0">
+                  <div class="label">Middle Name</div>
+                  <div class="value">
+                    <input type="text" maxlength="50" name="MiddleName" [(ngModel)]="lab.User.MIDDLE_NAME" class="field" #MiddleName="ngModel"
+                      required />
+                  </div>
+                </div>
+
+                <div class="labeled-block block grow-50 offset-right" *ngIf="lab.LAB_ID === 0">
+                  <div class="label required">Last Name</div>
+                  <div class="value">
+                    <input type="text" maxlength="50" name="LastName" [(ngModel)]="lab.User.LAST_NAME" class="field" #LastName="ngModel" required
+                    />
+                    <div [hidden]="LastName.pristine && !f.submitted && LastName.untouched">
+                      <div *ngIf="LastName.errors && LastName.errors.required" class="text-danger">
+                        Last Name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="labeled-block block grow-100 offset-right">
+                  <div class="label required">Email</div>
+                  <div class="value">
+                    <input emailValidate="true" [disabled]="lab.LAB_ID != 0" maxlength="50" name="Email" [(ngModel)]="lab.EMAIL" #contactemail="ngModel"
+                      required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [attr.maxlength]="200" class="field"
+                      (blur)="emailValidate()" (keydown)="emailCheckHandler($event)" />
+                  </div>
+                  <div [hidden]="contactemail.pristine && !f.submitted && contactemail.untouched">
+                    <div *ngIf="contactemail.errors && contactemail.errors.required" class="text-danger">
+                      Email is required
+                    </div>
+
+                    <div class="text-danger" *ngIf="isEmailExist">
+                      Email already exists
+                    </div>
+                  </div>
+                  <div *ngIf="isEmailValid" class="text-danger">
+                    Email is invalid
+                  </div>
+                </div>
+                <div class="labeled-block block grow-50 offset-right">
+                  <div class="label">Password</div>
+                  <div class="value">
+                    <input type="password" maxlength="40" name="Password" [(ngModel)]="lab.User.PASSWORD" class="field" #password="ngModel" minlength="4"
+                      maxlength="20" passwordValidate="true" required />
+                    <div [hidden]="password.valid || password.untouched" class="text-danger">
+                      <div *ngIf="password.errors && (password.errors.required || password.errors.minlength)" class="text-danger">
+                        Password is mandatory(for new user), and it should be a minimum of 4 characters.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="labeled-block block grow-50 offset-right">
+                  <div class="label">Confirm Password</div>
+                  <div class="value">
+                    <input type="password" maxlength="40" name="ConfirmPassword" [(ngModel)]="lab.User.CONFIRM_PASSWORD" class="field" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="titled-block block grow-1 m-r-10 edit-mode">
+              <div class="title">Lab Logo</div>
+              <div class="content-block flex-block flex-wrap">
+                <div class="labeled-block block grow-50 offset-right">
+                  <div class="label">Select Icon</div>
+                  <div class="value">
+                    <input #myInput id="file-upload" name="SelectIcon" type="file" (change)="imageUploadEvent($event)" accept="image/*" />
+                  </div>
+                </div>
+                <div class="labeled-block block grow-50 offset-right">
+                  <div class="label"></div>
+                  <div class="value" *ngIf="lab.ICON">
+                    <img [src]="lab.ICON" name="Image" style="width:60%" class="thumbnail">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="titled-block block grow-50 m-r-10 edit-mode">
+            <div class="title">Address Information</div>
+            <div class="content-block flex-block flex-wrap">
+              <div class="labeled-block block grow-100 offset-right">
+                <div class="label required">Address</div>
+                <div class="value">
+                  <textarea class="field small-field-box" name="Address" style="height: 92px; width: 100%;" #addressValidate="ngModel" required
+                    [(ngModel)]="lab.ADDR" maxlength="500"></textarea>
+                </div>
+                <div [hidden]="addressValidate.pristine && !f.submitted && addressValidate.untouched">
+                  <div *ngIf="addressValidate.errors && addressValidate.errors.required" class="text-danger">
+                    Address is required
+                  </div>
+                </div>
+              </div>
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label">City</div>
+                <div class="value">
+                  <input [(ngModel)]="lab.CITY" name="City" OnlyAlphaNumeric="true" required [attr.maxlength]="200" class="field" />
+                </div>
+              </div>
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label required">State</div>
+                <div class="value required">
+                  <p-dropdown [filter]="true" name="stateValidate" placeholder='Please Select' #stateValidate="ngModel" [options]="states"
+                    [(ngModel)]="lab.STATE_ID" required></p-dropdown>
+                </div>
+                <div [hidden]="stateValidate.pristine && !f.submitted && stateValidate.untouched">
+                  <div *ngIf="stateValidate.errors && stateValidate.errors.required" class="text-danger">
+                    Please select State
+                  </div>
+                </div>
+              </div>
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label required">Zip</div>
+                <div class="value">
+                  <input [(ngModel)]="lab.ZIP" name="Zip" maxlength="5" OnlyNumber="true" #zipValidate="ngModel" required class="field" />
+                </div>
+                <div [hidden]="zipValidate.pristine && !f.submitted && zipValidate.untouched">
+                  <div *ngIf="zipValidate.errors && zipValidate.errors.required" class="text-danger">
+                    Zip is required
+                  </div>
+                </div>
+              </div>
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label ">Fax</div>
+                <div class="value">
+                  <input name="Fax" [(ngModel)]="lab.FAX" OnlyNumber="true" class="field" maxlength="15" />
+                </div>
+              </div>
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label required">Phone (Only 10 digits)</div>
+                <div class="value">
+                  <input phoneValidateInput="true" type="text" name="Phone" [(ngModel)]="lab.PHONE" #phoneValidate="ngModel" required maxlength="10"
+                    class="field" (blur)="phoneCheckHandler(null,true)" (keydown)="phoneCheckHandler($event,false)" />
+                </div>
+                <div [hidden]="phoneValidate.pristine && !f.submitted && phoneValidate.untouched">
+                  <div *ngIf="phoneValidate.errors && phoneValidate.errors.required" class="text-danger">
+                    Phone is required
+                  </div>
+                </div>
+                <div *ngIf="isPhoneInvalid" class="text-danger">
+                  Phone No is not valid
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <footer class="footer site-container">
+    <div class="flex-block space-between">
+      <div class="flex-block">
+      </div>
+      <div class="flex-block block">
+        <button type="submit" class="btn btn-light h-50 m-l-20">Save</button>
+        <a class="btn btn-light h-50 m-l-20" (click)="cancel()">Cancel</a>
+      </div>
+    </div>
+  </footer>
+
+</form>

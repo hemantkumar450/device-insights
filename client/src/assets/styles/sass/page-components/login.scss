@@ -1,0 +1,61 @@
+.login-screen {
+  background-image: url("#{$path-to-images}/login.jpg");
+  background-size: cover;
+  height: calc(78vh);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  justify-content: center;
+  padding: 0 0 40px;
+
+  .form-block {
+    max-width: 800px;
+    padding:20px;
+  }
+
+  .title {
+    font-size: 50px;
+    padding:0 0 40px;
+    color: #fff;
+  }
+  .note {
+    font-size: 25px;
+    padding:0 0 40px;
+    color: $light-gray;
+  }
+  .login-footer {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: $light-gray;
+    a {
+      color: $light-gray;
+    }
+  }
+  .phone {
+    background: url("#{$path-to-images}/mobile-icon.png") left center no-repeat;
+    padding-left: 20px;
+    display: inline-block;
+    line-height: 20px;
+    margin:0 5px;
+  }
+  .email {
+    background: url("#{$path-to-images}/email-icon.png") left center no-repeat;
+    padding-left: 26px;
+    display: inline-block;
+    line-height: 20px;
+    margin:0 5px;
+  }
+  .muted {
+    text-align: left;
+    color: $light-gray;
+    a {
+      color: $light-gray;
+    }
+  }
+}

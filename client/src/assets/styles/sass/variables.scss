@@ -1,0 +1,61 @@
+$extra-light-gray:  #ebebeb;
+$semi-light-gray:  #d0d7df;
+$light-gray:  #b5c1cf;
+$normal-gray: #9dadbf;
+$dark-gray: #93a3b5;
+$heavy-gray: #576b86;
+$smooth-gray: #3d556d;
+
+$breadcrumb-color:  #464a4f;
+$normal-red:  #e20c0c;
+
+$light-blue: #aac6e3;
+$normal-blue: #164f86;
+$label-blue: #3d556c;
+$dark-blue: #1e384f;
+$black-blue: #1b2129;
+
+$font-family: 'Roboto', sans-serif;
+$scrollbar-offset: 30px;
+$header-height: 87px;
+$footer-height: 60px;
+$site-width: 100%;
+$right-margin: 30px;
+
+
+// $left-menu: 180px;
+$left-menu: 2%;
+$button-height-60:3.1vw;
+$button-height-50:2.9vw;
+$font-size-18:1vw;
+$font-size-20:1.04vw;
+$font-size-21:1.09vw;
+$font-size-25:1.3vw;
+$font-size-24:1.2vw;
+$font-size-30:1.56vw;
+
+
+//Width in vw
+
+$w-px-320 :6.77vw;
+
+//Height In vw 
+$h-px-80:4vw;
+$h-px-70:3.65vw;
+$h-px-50:2.60vw;
+$h-px-40:2.08vw;
+$h-px-44:2.29vw;
+$h-px-46:2.36vw;
+$h-px-48:2.5vw;
+$h-px-30:1.56vw;
+$site-content-height: calc(100vh - #{$header-height} - #{$h-px-80});
+$list-scroll: calc(100vh - #{$header-height} - #{$h-px-80} - #{30px});
+$list-scroll-r: calc(100vh - #{$header-height} - #{$h-px-80} - #{56px});
+
+//padding in vw
+
+$p-t-11:0.45vw;
+
+$main-content: calc(#{$site-width} - #{$left-menu});
+
+$path-to-images: '/assets/images';

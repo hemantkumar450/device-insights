@@ -1,0 +1,165 @@
+<p-growl [(value)]="errorMsg" [immutable]="false" life="7000"></p-growl>
+<form #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
+  <div class="flex-block site-content">
+    <div class="main-content">
+      <div class="content" scroll-bar>
+        <error></error>
+        <div class="flex-block">
+
+          <div class="titled-block block grow-40 m-r-10 edit-mode">
+            <div class="title">Sensor Information</div>
+            <div class="content-block flex-block flex-wrap">
+
+              <div class="labeled-block block grow-70 offset-right">
+                <div class="label required">Sensor Id</div>
+                <div class="value required">
+                  <input name="sensorIdValidation" maxlength="10" #sensorIdValidation="ngModel" [disabled]="device.SENSOR_ID>0" [(ngModel)]="device.SENSOR_FACTORY_ID"
+                    type="number" class="field" required />
+                </div>
+                <div [hidden]="sensorIdValidation.pristine && !f.submitted && sensorIdValidation.untouched">
+                  <div *ngIf="sensorIdValidation.errors && sensorIdValidation.errors.required" class="text-danger">
+                    Sensor Id is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="labeled-block block grow-70 offset-right">
+                <div class="label required">Sensor Code</div>
+                <div class="value required">
+                  <input name="SensorCode" maxlength="10" [disabled]="device.SENSOR_ID>0" [(ngModel)]="device.SENSOR_FACTORY_CODE" OnlyAlphaNumeric="true"
+                    #sensorCode="ngModel" required class="field" />
+                </div>
+                <div [hidden]="sensorCode.pristine && !f.submitted && sensorCode.untouched">
+                  <div *ngIf="sensorCode.errors && sensorCode.errors.required" class="text-danger">
+                    Sensor code is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="labeled-block block grow-70 offset-right">
+                <div class="label required">Sensor Type</div>
+                <div class="value required">
+                  <p-dropdown [filter]="true" [disabled]="device.SENSOR_ID>0" name="SensorType" placeholder='Please Select' [options]="sensorTypes"
+                    [(ngModel)]="device.SENSOR_TYPE_ID" [filter]="true" required></p-dropdown>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="titled-block block grow-60 m-r-10 edit-mode">
+            <div class="title">Other Information</div>
+            <div class="content-block flex-block flex-wrap">
+
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label">upper Limit</div>
+                <div class="value">
+                  <input type="text" maxlength="3" #upperLimit="ngModel" name="UpperLimit" OnlyDecimalNumber="true" [(ngModel)]="device.UPPER_LIMIT"
+                    class="field" required/>
+                </div>
+                <div [hidden]="upperLimit.pristine && !f.submitted && upperLimit.untouched">
+                  <div *ngIf="upperLimit.errors && upperLimit.errors.required" class="text-danger">
+                    Upper limit is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label">Lower Limit</div>
+                <div class="value">
+                  <input type="text" maxlength="3" #lowerLimit="ngModel" name="LowerLimit" OnlyDecimalNumber="true" [(ngModel)]="device.LOWER_LIMIT"
+                    class="field" required/>
+                </div>
+                <div [hidden]="lowerLimit.pristine && !f.submitted && lowerLimit.untouched">
+                  <div *ngIf="lowerLimit.errors && lowerLimit.errors.required" class="text-danger">
+                    Lower limit is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label">Minutes</div>
+                <div class="value">
+                  <input type="text" [disabled]="device.SENSOR_ID>0" name="Minutes" maxlength="4" OnlyDecimalNumber="true" [(ngModel)]="device.FREQ_IN_MINUTES"
+                    class="field" />
+                </div>
+              </div>
+
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label">Battery</div>
+                <div class="value">
+                  <input type="number" name="Battery" (keypress)="keyPressBattery($event)" [(ngModel)]="device.BATTERY" maxlength="2" min=0
+                    max=100 class="field" [disabled]="device.SENSOR_ID>0" />
+                </div>
+              </div>
+
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label required">Location</div>
+                <div class="value required">
+                  <p-dropdown [filter]="true" [disabled]="device.SENSOR_ID>0" #location="ngModel" name="locations" placeholder='Please Select' [options]="locations"
+                    [(ngModel)]="device.LOCATION_ID" [filter]="true" required></p-dropdown>
+                </div>
+                <div [hidden]="location.pristine && !f.submitted && location.untouched">
+                  <div *ngIf="location.errors && location.errors.required" class="text-danger">
+                    Please select atleast one location
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex-block">
+
+          <div class="titled-block block grow-100 m-r-10 edit-mode">
+            <div class="title">Lab Admin Information</div>
+            <div class="content-block flex-block flex-wrap">
+              
+              <div class="labeled-block block grow-20 offset-right">
+                <div class="label required">Phone Number</div>
+                <div class="value required">
+                  <p-chips [disabled]="true" [(ngModel)]="Phone" name="Phone"></p-chips>
+                </div>
+              </div>
+              
+
+              <div class="labeled-block block grow-50 offset-right">
+                <div class="label required">Email Id</div>
+                <div class="value required">
+                  <p-chips [disabled]="true" [(ngModel)]="EmailId" name="EmailId"></p-chips>
+                </div>
+              </div>
+
+              <div class="labeled-block block grow-30 offset-right">
+                <div class="labeled-block block grow-100 offset-right"></div>
+                <div class="labeled-block block grow-100 offset-right"></div>
+                <div class="labeled-block block grow-50 offset-right">
+                  <span class="text-danger">Email Notification will send to these Lab Admin email ids if sensor reading is less than or more than the
+                    given limits</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="footer site-container">
+    <div class="flex-block space-between">
+      <div class="flex-block">
+      </div>
+      <div class="flex-block block">
+        <button type="submit" class="btn btn-light h-50 m-l-20">Save</button>
+        <a class="btn btn-light h-50 m-l-20" (click)="cancel()">Cancel</a>
+      </div>
+    </div>
+  </footer>
+
+</form>

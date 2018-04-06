@@ -1,0 +1,61 @@
+<p-growl [(value)]="errorMsg" [immutable]="false" life="7000"></p-growl>
+<div class="flex-block site-content">
+  <smart-lab-left-navbar></smart-lab-left-navbar>
+  <div class="main-content">
+    <error></error>
+    <div class="content" scroll-bar>
+      <p-dataTable [value]="sensorTypes" scrollable="true" [paginator]="false" [rows]="pageSize" [responsive]="true" (onSort)="onSorting($event)"
+        (onFilter)="onFiltering($event)">
+        <p-column field="SENSOR_TYPE_NAME" header="Sensor Type Name" [sortable]="true" [filter]="true" filterMatchMode="contains"
+          filterPlaceholder="Search">
+          <ng-template let-sensorType="rowData" pTemplate="body">
+            <input class="form-control help-block text-danger" maxlength="50" OnlyEntityName="true" *ngIf="sensorType.isEdit == true || sensorType.SENSOR_TYPE_ID == 0"
+              type="text" [(ngModel)]="sensorType.SENSOR_TYPE_NAME" />
+            <span *ngIf="sensorType.isEdit == false && sensorType.SENSOR_TYPE_ID != 0">{{sensorType.SENSOR_TYPE_NAME}}</span>
+          </ng-template>
+        </p-column>
+
+        <p-column styleClass="col-button" [style]="{'width':'130px'}" header="Actions">
+          <ng-template let-compound="rowData" pTemplate="body">
+            <div>
+              <span *ngIf="compound.SENSOR_TYPE_ID == 0 || compound.isEdit == true" pTooltip="Save" class="cursor-pointer" (click)="saveSensorType(compound)">
+                <i class="fa fa-floppy-o fa-md m3 m6 edit" aria-hidden="true"></i>
+              </span>
+
+              <span *ngIf="compound.SENSOR_TYPE_ID != 0 && compound.isEdit != true" class="cursor-pointer" (click)="editSensorType(compound)">
+                <i class="fa fa-pencil fa-md m3 m6 edit" aria-hidden="true"></i>
+              </span>
+              <span>|</span>
+
+              <span *ngIf="compound.SENSOR_TYPE_ID == 0 || compound.isEdit == true" pTooltip="Cancel" class="cursor-pointer" (click)="cancelSensorType(compound)">
+                <i class="fa fa-times fa-md m3 m6 edit" aria-hidden="true"></i>
+              </span>
+
+              <span *ngIf="compound.SENSOR_TYPE_ID != 0 && compound.isEdit != true" class="cursor-pointer" (click)="deleteSensorType(compound)">
+                <i class="fa fa-trash fa-md m3 m6 edit" aria-hidden="true"></i>
+              </span>
+            </div>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+      <p-paginator [hidden]="totalRecords<pageSize" [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="pageChanged($event)"></p-paginator>
+    </div>
+  </div>
+</div>
+
+<footer class="footer site-container">
+  <div class="flex-block space-between">
+    <div class="flex-block">
+      <!--pagination here-->
+    </div>
+    <div class="flex-block block">
+      <div class="block" style="margin-top:1%">
+        <h1 style="color:white">Total Sensor Type: {{totalRecords}}</h1>
+      </div>
+      <div class="delim m-l-30"></div>
+      <a class="btn btn-light h-50 m-l-20" (click)="addSensorType()">Add Sensor Type</a>
+    </div>
+  </div>
+</footer>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

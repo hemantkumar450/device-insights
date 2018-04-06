@@ -1,0 +1,24 @@
+.footer {
+  background: $normal-blue;
+ 
+   height: $h-px-80;
+  padding: 12px 0;
+  position: fixed; 
+  left: 0; 
+  bottom:0;
+   width:100%;
+    z-index: 100;
+
+  .site-container {
+      padding-left: $left-menu;
+      padding-right: $scrollbar-offset;
+  }
+
+  h2 {
+    color: $light-blue;
+    // font-size: 25px;
+    font-size: 1.28vw;
+    font-weight: 500;
+    padding: 12px 0 0;
+  }
+}

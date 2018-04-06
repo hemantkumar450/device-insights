@@ -1,0 +1,118 @@
+<div class="site-container">
+  <div class="site-container">
+    <div class="flex-block align-center p-t-10">
+      <div class="block logo">
+
+        <a *ngIf="!logo" href="#" style="text-align: center">
+          <img src="./assets/images/logo.png" style="width: 90%;" />
+          <div style="margin-top: -40px;" *ngIf="isLoggedUser">
+            <span style="font-size: initial;font-family: fantasy;color: #164F86;background: #f2eff9;opacity: 0.7;">{{currentUser.labName}}</span>
+          </div>
+        </a>
+        <div *ngIf="logo !== null" style="text-align: center">
+          <div>
+            <img *ngIf="logo" [src]="logo" style="width: 200px;margin-left: -17px;height: 55px;">
+            <img *ngIf="logo===null" src="./assets/images/logo.png" style="width: 150px;margin-left: 05px;height: 55px;" />
+          </div>
+          <div *ngIf="logo" style="margin-top: -40px;margin-left: -35px;">
+            <span style="font-size: initial;font-family: fantasy;color: #164F86;background: #f2eff9;opacity: 0.7;">{{currentUser.labName}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="block grow-1">
+        <top-navbar></top-navbar>
+      </div>
+      <div class="block">
+        <div class="flex-block align-center user-account">
+          <div class="block user-avatar">
+            <img *ngIf="userIcon === null" src="./assets/images/user.jpg" />
+            <img *ngIf="userIcon != null" [src]="userIcon" />
+          </div>
+          <div class="block">
+            <div style="cursor: pointer" (click)="openProfile()">{{currentUser.userName}} |
+              <a class="pointer" (click)="logout()">Sign Out</a>
+            </div>
+            <div class="datetime">{{currentTime | date:'MM/dd/yyyy , EEEE hh:mm a'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<p-dialog [(visible)]="showDialog" modal="modal" [width]="600" [height]="450">
+  <p-header *ngIf="currentUser.roleId === 1">
+    Logged as Application Admin - Current User : {{currentUser.userName}}
+  </p-header>
+  <div class="block grow-50 m-r-20" style="height: 300px;">
+    <p-messages [(value)]="errorMsg"></p-messages>
+    <div class="content-block flex-block grow-1">
+      <div class="labeled-block offset-right block grow-80">
+        <div class="value">
+          <p-dropdown placeholder='Please Select Lab' [options]="labDDO" [(ngModel)]="labId" [filter]="true">
+            <ng-template let-lab pTemplate="item">
+              <div class="ui-helper-clearfix">
+                <div style="font-size:14px;float:left;margin-top:4px">{{lab.label}}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+      <div style="float:right" style="margin-top:1%">
+        <a class="btn btn-light h-50 m-l-20" (click)="onLabSelect()">Change</a>
+      </div>
+    </div>
+  </div>
+
+  <p-footer class="ui-dialog-buttonpane">
+    <div style="float:right">
+      <span *ngIf="loggedAsAdmin">
+        <b>Application Admin Already Logged-In</b>
+      </span>
+      <a *ngIf="!loggedAsAdmin" class="btn btn-light h-50 m-l-20" style="margin-top:2%" (click)="adminSignIn()">Sign in as Admin</a>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog [(visible)]="changePasswordDialog" modal="modal" [width]="600" [height]="370">
+  <p-header>
+    Change Password
+  </p-header>
+  <div class="block grow-50 m-r-20" style="height: 230px;">
+    <p-messages [(value)]="errorMsg"></p-messages>
+    <div class="content-block flex-block flex-wrap">
+      <div class="labeled-block block grow-1 offset-right">
+        <div class="text-danger">After change password, You will redirect on login page.</div>
+      </div>
+      <div class="labeled-block block grow-1 offset-right edit-mode">
+        <div class="labeled-block block grow-40 offset-right" style="float: left;padding-top: 10px;">
+          <div class="label required">New Password</div>
+        </div>
+        <div class="labeled-block block grow-60 offset-right" style="float: left">
+          <div class="value required">
+            <input type="password" name="password" [(ngModel)]="password" maxlength="20" class="field" (keydown)="checkPasswordValidation($event)"
+              (blur)="checkPasswordValidation($event)" passwordValidate="true" required/>
+            <div class="text-danger" *ngIf="isInvalidPasswordValidation">
+              Password is mandatory(for new user), and it should be a minimum of 4 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="labeled-block block grow-100 offset-right edit-mode">
+        <div class="labeled-block block grow-40 offset-right" style="float: left;padding-top: 10px;">
+          <div class="label required">Confirmed Password</div>
+        </div>
+        <div class="labeled-block block grow-60 offset-right" style="float: left">
+          <div class="value required">
+            <input type="password" name="password" [(ngModel)]="confirmPassword" maxlength="20" class="field" required/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-footer class="ui-dialog-buttonpane">
+    <button type="button" pButton icon="fa-close" (click)="changePasswordDialog=false" label="Cancel"></button>
+    <button type="button" pButton icon="fa-check" (click)="changePassword()" label="Change Password"></button>
+  </p-footer>
+</p-dialog>

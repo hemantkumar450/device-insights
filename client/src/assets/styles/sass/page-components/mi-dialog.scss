@@ -1,0 +1,36 @@
+md-dialog {
+  border-radius: 10px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.mi-dialog {
+  border: 4px solid $light-gray;
+  border-radius: 10px;
+  background: $semi-light-gray;
+
+
+  .mi-dialog-title {
+    background: $light-gray;
+    color: $normal-blue;
+    padding: 6px 20px;
+    font-size: 24px;
+  }
+  .mi-dialog-content {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 15px 20px 10px;
+
+    .scroll-content {
+      height: 500px;
+    }
+
+    .mCSB_container.mCS_no_scrollbar_y.mCS_y_hidden {
+      margin-right: 30px;
+    }
+
+  }
+  .mi-dialog-footer {
+    padding: 20px 30px 15px 0;
+  }
+}

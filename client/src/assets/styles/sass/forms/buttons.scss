@@ -1,0 +1,99 @@
+
+.btn {
+  display: inline-block;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 5px;
+  height: 40px;
+  //font-size: 25px;
+    @media (min-width: 1300px)  {
+    font-size: 1vw;
+  }
+  @media (min-width: 1500px)  {
+    font-size:1.3vw;
+  }
+ 
+  line-height: $h-px-40;
+  margin:0;
+  font-family: $font-family;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: middle;
+
+  color: $dark-blue;
+  background-color: $normal-gray;
+  transition: all 200ms;
+
+  &.h-50 {
+    line-height: $h-px-50;
+    height: $h-px-50;
+  }
+  &.h-60 {
+    // line-height: 60px;
+    // height: 60px;
+    line-height: $button-height-60;
+    height: $button-height-60;
+  }
+  &.btn-dark {
+    color: #fff;
+    background-color: $normal-blue;
+  }
+  &.btn-light {
+    color: $normal-blue;
+    background-color: $light-blue;
+  }
+  &.btn-active {
+    color: #fff;
+    background-color: $dark-blue;
+  }
+  &:hover {
+    color: #fff;
+    background-color: $dark-blue;
+  }
+
+  .arrow {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    vertical-align: middle;
+    display: inline-block;
+
+    &.up {
+      border-bottom: 8px solid $dark-blue;
+    }
+    &.down {
+      border-top: 8px solid $dark-blue;
+    }
+  }
+}
+
+
+.btn {
+  &.chips {
+    color: $dark-blue;
+    background-color: $light-gray;
+    line-height: $h-px-50;
+    height:$h-px-50;
+    cursor: inherit;
+    padding:0 15px 0 15px;
+    margin: 6px 10px 6px 0;
+    display: inline-block;
+    vertical-align: middle;
+
+    &:hover {
+    }
+    .remove-icon {
+      cursor: pointer;
+      width: 22px;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+      margin-bottom: 3px;
+      background: url("#{$path-to-images}/remove-icon.png") center center no-repeat;
+    }
+  }
+}

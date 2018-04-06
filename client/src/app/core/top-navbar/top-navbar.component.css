@@ -1,0 +1,19 @@
+.minwidth {
+  width: auto !important;
+}
+
+
+.dropdown-menu-wrapper .menu-list {
+  width: 165 !important;
+}
+.dropdown-menu-wrapper{
+  width: 165 !important;
+}
+
+
+
+.dropdownWidth{
+  width:200px !important;
+  margin-right: 5px !important;
+  padding: 0;
+}

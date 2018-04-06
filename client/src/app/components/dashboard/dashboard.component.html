@@ -1,0 +1,71 @@
+<div class="flex-block site-content">
+  <div class="main-content">
+    <error></error>
+    <div class="content" scroll-bar>
+      <div class="flex-block">
+        <div class="titled-block block grow-100 m-r-20">
+          <div class="title">Modules</div>
+          <div class="content-block flex-block flex-wrap" style="text-align:left;min-height: 200px;">
+            <div class="ui-g-3" *ngFor="let module of modules">
+
+              <div class="ui-g-8 shadow qualityBlock" pTooltip="{{module.MODULE_NAME}}" tooltipPosition="top" *ngIf="module.MODULE_ID === QCModule"
+                (click)="routePage(1)">
+                <div>
+                  <div class="ui-g-4">
+                    <img src="../../assets/images/quality.png" alt="" class="qualityImage">
+                  </div>
+                  <div class="ui-g-6" style="margin-left: -7%;">
+                    <p class="qualityPTag">{{module.MODULE_NAME}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-8 shadow smartLabBlock" pTooltip="{{module.MODULE_NAME}}" (click)="routePage(2)" *ngIf="module.MODULE_ID === SMModule"
+                tooltipPosition="top">
+                <div>
+                  <div class="ui-g-4">
+                    <img src="../../assets/images/monitor.png" alt="" class="smartLabImage">
+                  </div>
+                  <div class="ui-g-6">
+                    <p class="smartPTag">{{module.MODULE_NAME}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-8 shadow instrumentBlock" pTooltip="{{module.MODULE_NAME}}" tooltipPosition="top" (click)="routePage(3)"
+                *ngIf="module.MODULE_ID === IMModule">
+                <div>
+                  <div class="ui-g-4">
+                    <img class="instrumentImage" src="../../assets/images/binoculars.png" alt="">
+                  </div>
+                  <div class="ui-g-6">
+                    <p class="instrumentPTag">{{module.MODULE_NAME}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-8 shadow analyticBlock" pTooltip="{{module.MODULE_NAME}}" tooltipPosition="top" (click)="routePage(4)" *ngIf="module.MODULE_ID === AModule">
+                <div>
+                  <div class="ui-g-4">
+                    <img class="analyticImage" src="../../assets/images/newspaper.png" alt="">
+                  </div>
+                  <div class="ui-g-6">
+                    <p class="analyticPTag">{{module.MODULE_NAME}}</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer site-container">
+  <div class="flex-block space-between">
+    <div class="flex-block"></div>
+    <div class="flex-block block">
+    </div>
+  </div>
+</footer>

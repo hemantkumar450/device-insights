@@ -1,0 +1,10 @@
+<div class="site-container">
+  <div class="flex-block align-center p-t-10">
+    <div class="block grow-1 top-navbar" id="mainMenu">
+      <a *ngFor="let item of topMenus; let index = index" [ngClass]="{'btn-active': item.isActive===true}" class="btn btn-dark minwidth"
+        (click)="changeTopMenu(item)">
+        {{item.title}}
+      </a>
+    </div>
+  </div>
+</div>

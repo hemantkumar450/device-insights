@@ -1,0 +1,8 @@
+<div class="block l-w-180 left-menu">
+  <div class="content" scroll-bar>
+    <a *ngFor="let item of leftMenuItems" [ngClass]="{'btn-active': item.isActive}" class="btn btn-square t-w-160 m-b-8" (click)="openComponent(item);">
+      <svg-icon src="./assets/images/icons/{{folderName}}/{{item.icon}}"></svg-icon>
+      <b>{{item.title}}</b>
+    </a>
+  </div>
+</div>

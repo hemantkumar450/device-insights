@@ -1,0 +1,12 @@
+<angular-loader></angular-loader>
+<router-outlet></router-outlet>
+
+<p-dialog header="Warning Dialog" [(visible)]="display" modal="modal" width="600" [responsive]="true">
+    <p>
+        <strong>{{idleState}}</strong>
+    </p>
+    <p-footer class="ui-dialog-buttonpane">
+        <button type="button" pButton icon="fa-close" (click)="reset()" label="Ignore"></button>
+        <button type="button" pButton icon="fa-check" (click)="logout()" label="Logout"></button>
+    </p-footer>
+</p-dialog>

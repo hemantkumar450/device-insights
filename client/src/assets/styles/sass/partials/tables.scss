@@ -1,0 +1,79 @@
+.table-wrapper {
+  margin: 0 0 10px;
+
+  .table-content {
+    display: table;
+    border-top: 2px solid $normal-blue;
+    border-bottom: 2px solid $normal-blue;
+    border-left: 1px solid $normal-blue;
+    border-right: 1px solid $normal-blue;
+    border-radius: 4px;
+    border-collapse: separate;
+    width: 100%;
+    table-layout: fixed;
+    background: $extra-light-gray;
+
+    .table-row {
+      width: 100%;
+      display: table-row;
+      &:nth-child(2n+1) {
+        background: $light-blue;
+      }
+      &.hover-row:hover {
+        background: $dark-gray;
+        cursor: pointer;
+      }
+    }
+    .table-header {
+      background: $dark-gray;
+      padding: 15px 20px;
+      font-size: $font-size-24;
+      font-weight:500;
+      display: table-cell;
+      border-left: 1px solid $normal-blue;
+      border-right: 1px solid $normal-blue;
+
+      &.checkbox-cell {
+        text-align: center;
+        width: 120px;
+      }
+      &.actions-cell {
+        text-align: center;
+        width: 200px;
+      }
+      &.width-30-percent {
+        width: 30%;
+      }
+    }
+    .table-cell {
+      padding: .78vw 1.05vw;
+      font-size: $font-size-25;
+      display: table-cell;
+      border-left: 1px solid $normal-blue;
+      border-right: 1px solid $normal-blue;
+      word-wrap: break-word;
+
+      &.checkbox-cell {
+        text-align: center;
+        width: 120px;
+      }
+
+      &.actions-cell {
+        color: $smooth-gray;
+        text-align: center;
+        width: 9.375vw;
+      }
+
+      .grid-icon {
+        min-width: inherit;
+        margin: -5px 0;
+
+        md-icon {
+          height: 2vw;
+          width:2vw;
+          color: $heavy-gray;
+        }
+      }
+    }
+  }
+}

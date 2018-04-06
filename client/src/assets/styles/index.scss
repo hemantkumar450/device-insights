@@ -1,0 +1,48 @@
+/**
+ *  Do not remove the comment below. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,600");
+@import "sass/reset";
+@import "sass/variables";
+@import "sass/common";
+@import "sass/ng-toast";
+@import "sass/scroll-override";
+
+
+@import "sass/forms/forms";
+@import "sass/forms/datepicker-override";
+@import "sass/forms/sort-icon";
+// @import "sass/forms/checkbox";
+@import "sass/forms/switch";
+@import "sass/forms/buttons";
+@import "sass/forms/tooltip";
+
+@import "sass/partials/tables";
+@import "sass/partials/header";
+@import "sass/partials/left-menu";
+@import "sass/partials/pagination";
+@import "sass/partials/footer";
+
+@import "sass/page-components/mi-dialog";
+@import "sass/page-components/login";
+@import "sass/flow";
+
+body {
+  height: 100%;
+  // browsers default to 16px for font-size,
+  // so setting top-level font-size to 62.5%
+  // scales 1rem to equal 10px.
+  font: 62.5% 'Roboto', sans-serif;
+  
+}
+
+/**
+ *  Do not remove the comment below. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector

@@ -1,0 +1,8 @@
+{
+  "generators": {
+    "modules": {}
+  },
+   "environment":"production",
+   "port":"4337",
+   "hookTimeout":80000
+}

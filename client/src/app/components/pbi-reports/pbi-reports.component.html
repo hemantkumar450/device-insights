@@ -1,0 +1,50 @@
+<p-growl [(value)]="errorMessage" [immutable]="false" life="7000"></p-growl>
+<div class="flex-block site-content">
+    <pbi-reports-left-navbar></pbi-reports-left-navbar>
+    <div class="main-content">
+        <error></error>
+        <div class="content" scroll-bar>
+            <div>
+                <p-dataTable [value]="PBIReports" scrollable="true" [paginator]="false" [rows]="pageSize" [responsive]="true" (onSort)="onSorting($event)"
+                    (onFilter)="onFiltering($event)" scrollHeight="488px">
+                    <p-column field="LAB_NAME" header="Lab Name" [sortable]="true" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search"></p-column>
+                    <p-column field="MODULE_NAME" header="Module Name" [sortable]="true" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search"></p-column>
+                    <p-column field="GROUP_ID" header="Group Id" [sortable]="true" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search"></p-column>
+                    <p-column field="REPORT_ID" header="Report Id" [sortable]="true" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search"></p-column>
+                    <p-column field="VIEW_NAME" header="VIEW NAME" [sortable]="true" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search"></p-column>
+                    <p-column styleClass="col-button" [style]="{'width':'130px'}" header="Actions">
+                        <ng-template let-pbiReport="rowData" pTemplate="body">
+                            <div>
+                                <span (click)="editPBIReports(pbiReport)" class="cursor-pointer">
+                                    <i class="fa fa-pencil fa-md m3 m6 edit" aria-hidden="true"></i>
+                                </span>
+                                <span>|</span>
+                                <span (click)="deletePBIReportsById(pbiReport)" class="cursor-pointer">
+                                    <i class="fa fa-trash fa-md m3 m6 edit" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+                <p-paginator [hidden]="totalRecords<pageSize" [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="pageChanged($event)"></p-paginator>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer site-container">
+    <div class="flex-block space-between">
+        <div class="flex-block">
+            <!--pagination here-->
+        </div>
+        <div class="flex-block block">
+            <div class="block" style="margin-top:1%">
+                <h1 style="color:white">Total PBI Reports: {{totalRecords}}</h1>
+            </div>
+            <div class="delim m-l-30"></div>
+            <a class="btn btn-light h-50 m-l-20" (click)="addPBIReports()">Add PBI Reports</a>
+        </div>
+    </div>
+</footer>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

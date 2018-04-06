@@ -1,0 +1,100 @@
+<p-growl [(value)]="errorMessage" [immutable]="false" life="7000"></p-growl>
+<div class="flex-block site-content">
+  <lab-left-navbar></lab-left-navbar>
+  <div class="main-content">
+    <error></error>
+    <div class="content" scroll-bar>
+      <div *ngIf='!isSuperAdmin'>
+        <p-dataTable [value]="labs" scrollable="true" [paginator]="false" [rows]="pageSize" [responsive]="true" (onSort)="onSorting($event)"
+          (onFilter)="onFiltering($event)" scrollHeight="488px">
+          <p-column *ngIf='!isSuperAdmin' field="LAB_NAME" header="Name" [sortable]="true" [filter]="true" filterMatchMode="contains"
+            filterPlaceholder="Search"></p-column>
+          <p-column *ngIf='isSuperAdmin' field="LAB_NAME" header="Lab Name"></p-column>
+          <p-column *ngIf='!isSuperAdmin' field="EMAIL" header="Email" [sortable]="true" [filter]="true" filterMatchMode="contains"
+            filterPlaceholder="Search"></p-column>
+          <p-column *ngIf='!isSuperAdmin' field="ADDR" header="Address" [sortable]="true" [filter]="true" filterMatchMode="contains"
+            filterPlaceholder="Search"></p-column>
+          <p-column *ngIf='!isSuperAdmin' field="ZIP" header="Zip" [sortable]="true" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search"></p-column>
+          <p-column *ngIf='!isSuperAdmin' field="IS_ACTIVE" header="Active/Deactive">
+            <ng-template let-lab="rowData" pTemplate="body">
+              <div>
+                <span *ngIf="lab.IS_ACTIVE"> Activated</span>
+                <span *ngIf="!lab.IS_ACTIVE"> Deactivated</span>
+              </div>
+            </ng-template>
+          </p-column>
+          <p-column *ngIf='!isSuperAdmin' styleClass="col-button" [style]="{'width':'130px'}" header="Actions">
+            <ng-template let-lab="rowData" pTemplate="body">
+              <div>
+                <span *ngIf="lab.IS_ACTIVE" (click)="editLab(lab.LAB_ID)" class="cursor-pointer">
+                  <i class="fa fa-pencil fa-md m3 m6 edit" aria-hidden="true"></i>
+                </span>
+                <span *ngIf="lab.IS_ACTIVE">|</span>
+                <span *ngIf="lab.IS_ACTIVE" (click)="deleteLabById(lab)" class="cursor-pointer">
+                  <i class="fa fa-toggle-on fa-md m3 m6 edit" aria-hidden="true"></i>
+                </span>
+                <span *ngIf="!lab.IS_ACTIVE" (click)="activateLabById(lab.LAB_ID)">
+                  <i class="fa fa-toggle-off fa-md m3 m6 edit" aria-hidden="true"></i>
+                </span>
+              </div>
+            </ng-template>
+          </p-column>
+
+          <p-column *ngIf='isSuperAdmin' header="switch">
+            <ng-template let-lab="rowData" pTemplate="body">
+              <span (click)="adminSignIn(lab)">
+                <i class="fa fa-external-link fa-md m3 m6 edit" aria-hidden="true"></i>
+              </span>
+            </ng-template>
+          </p-column>
+
+        </p-dataTable>
+        <p-paginator [hidden]="totalRecords<pageSize" [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="pageChanged($event)"></p-paginator>
+      </div>
+
+
+
+      <div class="flex-block" *ngIf='isSuperAdmin'>
+        <div class="titled-block block grow-100 m-r-20">
+          <div class="title">Labs</div>
+          <div class="content-block flex-block flex-wrap" style="text-align:left;min-height: 200px;">
+            <div class="ui-g-3 alternateColor" *ngFor="let lab of labs;let index=index">
+
+              <div style="margin-bottom: 3%">
+                <div class="ui-g-8 shadow qualityBlock" style="height: 100%;padding-bottom: 15px;" pTooltip="Switch into lab" tooltipPosition="top"
+                  (click)="adminSignIn(lab)">
+                  <div>
+                    <div class="ui-g-4">
+                      <img src="../../assets/images/labIcon.png" alt="" class="qualityImage">
+                    </div>
+                    <div class="ui-g-7" style="margin-left: 4%">
+                      <p class="qualityPTag">{{lab.LAB_NAME}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer site-container">
+  <div class="flex-block space-between">
+    <div class="flex-block">
+      <!--pagination here-->
+    </div>
+    <div class="flex-block block">
+      <div class="block" style="margin-top:1%">
+        <h1 style="color:white">Total Labs: {{totalRecords}}</h1>
+      </div>
+      <div class="delim m-l-30" *ngIf='!isSuperAdmin'></div>
+      <a class="btn btn-light h-50 m-l-20" (click)="addLab()" *ngIf='!isSuperAdmin'>Add Laboratory</a>
+    </div>
+  </div>
+</footer>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

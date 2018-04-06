@@ -1,0 +1,49 @@
+
+.shadow{
+   box-shadow:2px 2px 10px 10px #888888; 
+  /* box-shadow: 10px 10px 5px #888888 !important; */
+  /* -webkit-box-shadow:2px 1px 20px 8px #888888; */
+  -webkit-box-shadow: 1px 1px 10px 5px #888888;
+ -moz-box-shadow:2px 2px 10px 10px #888888; 
+}
+
+.qualityBlock {
+    border: #d3d3d3 solid 1px;
+    /* background-color: #EBA03C !important; */
+    cursor: pointer;
+    opacity: 0.7;
+    margin-top: 1%;
+}
+
+.qualityPTag {
+    color: #fff;font-size: x-large;margin: 0;font-family: adobe clean light
+}
+
+.qualityImage {
+    height: 70px !important;
+    width: 70px !important;
+    margin-left: 5px !important;
+    margin-bottom: -18px !important;
+    margin-top: -7px !important;
+}
+
+.alternateColor:nth-child(4n+1) .qualityBlock {
+    background-color: #EBA03C !important;
+    /* possibly other styles */
+}
+
+.alternateColor:nth-child(4n+2) .qualityBlock {
+    background-color: #868A8A !important;
+    /* possibly other styles */
+}
+
+.alternateColor:nth-child(4n+3) .qualityBlock {
+    background-color: #519BAE !important;
+    /* possibly other styles */
+}
+
+.alternateColor:nth-child(4n+4) .qualityBlock {
+    background-color: #DC8468 !important;
+    /* possibly other styles */
+}
+

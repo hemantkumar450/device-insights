@@ -1,0 +1,361 @@
+html {
+  box-sizing: border-box;
+  font-family: $font-family;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+md-radio-button {
+    box-sizing: border-box;
+    display: inline;
+    font-size:1.04vw;
+    margin-left:15px;
+    white-space: nowrap;
+    cursor: pointer;
+    position: relative;
+}
+.loading {
+  font-size:20px;
+}
+ 
+h1 {
+  // font-size: 30px;
+  font-size: $font-size-30;
+  font-weight: 500;
+} 
+a {
+  color: $normal-blue;
+  text-decoration: none;
+}
+.gridTitle{
+  font-size: $font-size-25;
+  padding-bottom:20px;
+  font-weight: 400;
+  
+}
+.img-12 {
+  height: 12px;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+
+#list-wrapper{
+    max-height: $list-scroll;
+    overflow-y: scroll;
+}
+#list-wrapper::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+}
+#list-wrapper::-webkit-scrollbar-thumb {
+    height: 18px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    -webkit-border-radius: 20px;
+    background-color: #6b7f9a;
+    -webkit-box-shadow: inset -1px -1px 0px #9cadbf, inset 1px 1px 0px #6b7f9a;
+    margin-right:10px
+}
+#list-wrapper::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+#list-wrapper::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+
+
+#list-wrapper-r{
+    max-height: $list-scroll-r;
+    overflow-y: scroll;
+}
+#list-wrapper-r::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+}
+#list-wrapper-r::-webkit-scrollbar-thumb {
+    height: 18px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    -webkit-border-radius: 20px;
+    background-color: #6b7f9a;
+    -webkit-box-shadow: inset -1px -1px 0px #9cadbf, inset 1px 1px 0px #6b7f9a;
+    margin-right:10px
+}
+#list-wrapper-r::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+#list-wrapper-r::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+
+.l-w-180{
+
+  flex: 0 0 9.375vw;
+  width: 9.375vw;
+}
+.t-w-170{
+  width:8.85vw;
+}
+.t-w-160{
+  width:7vw;
+}
+.l-w-130{
+  width:6.77vw;
+}
+
+ tooltip tip {
+    border-radius: 3px;
+    background: rgba(0,0,0,.85);
+    color: #fff;
+    display: none;
+    line-height: normal;
+    max-width: 500px;
+    min-width: 300px;
+    opacity: 0;
+    padding: 8px 16px;
+    position: absolute;
+    text-align: center;
+    width: auto;
+    will-change: top,left,bottom,right;
+}
+
+input[type="search"]{
+width: 90%;
+padding-right:0; 
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+
+  /* Remove default */
+  -moz-appearance:none !important;
+  -webkit-appearance:none !important;
+    
+  /* Now your own custom styles */
+  height: 15px;
+  width: 11.9px;
+  position:relative;
+  right:10px;      
+  background-image: url("../images/Delete.svg");
+  // background: red;
+  /* Will place small red box on the right of input (positioning carries over) */
+
+}
+
+/* Plate Set up Gui Css Start Here */
+
+.color-red{
+  display: inline-block;
+  background-color: #FF8080
+}
+.color-grey{
+  display: inline-block;
+  background-color: #6699ff
+}
+.color-green{
+  display: inline-block;
+  background-color: #CCFFFF
+}
+.color-pink{
+  display: inline-block;
+  background-color: #FFCCFF
+}
+
+.plate-label{
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.circle
+{
+    border-radius: 50%;
+    width: 2.947vw;
+    height: 2.947vw;
+    padding: .736vw;
+    border: 2px solid #ededed;
+    color: #666;
+    text-align: center;
+    font-size: .631vw;
+    word-break:break-word
+}
+.blockHead:after {
+  color: #4D81BF;
+  border-left: 20px solid;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  display: inline-block;
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: 0;
+}
+.blockHead {
+  background-color: #4D81BF;
+  /*width: 150px; */
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  position: relative;
+}
+.blocktext {
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
+  font-family: Arial;
+  font-size: 11;
+}
+
+/* Plate Set up Gui Css End Here */
+
+/* Test Result GUI CSS Start Here */
+
+.advancedDemo .dropzone ul[dnd-list] {
+    min-height: 42px;
+    margin: 0px;
+    padding-left: 0px;
+  }
+  
+  .advancedDemo .dropzone li {
+    display: block;
+  }
+  
+  .advancedDemo .dropzone .dndDragging {
+    opacity: 0.7;
+  }
+ 
+  .advancedDemo .dropzone .dndDraggingSource {
+    opacity: 0.5;
+  }
+  
+  .advancedDemo .dropzone .dndPlaceholder {
+    background-color: #ddd !important;
+    display: block;
+    min-height: 42px;
+  }
+  
+  .formulalist {
+    min-height: 35px !important;
+  }
+  
+  .formulalist>li:hover {
+    background-color: #337ab7;
+    color: #fff;
+    padding-left: 10px;
+    padding-top: 3px;
+    margin-left: 5px;
+  }
+ 
+  .formulalist>li {
+    border: none;
+    border-radius: .25em;
+    float: left;
+    height: 30px;
+    padding-left: 5px;
+    padding-top: 3px;
+    min-width: 10px;
+    font-size: 18px;
+  }
+
+  .resultlist {
+    min-height: 35px !important;
+  }
+  
+  .resultlist>li {
+    background-color: #337ab7;
+    border: none;
+    border-radius: .25em;
+    color: #fff;
+    float: left;
+    font-weight: 700;
+    height: 30px;
+    margin: 5px;
+    padding: 3px;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .advancedDemo .dropzone .itemlist {
+    min-height: 35px !important;
+  }
+  
+  .advancedDemo .dropzone .itemlist>li {
+    background-color: #337ab7;
+    border: none;
+    border-radius: .25em;
+    color: #fff;
+    float: left;
+    font-weight: 700;
+    height: 30px;
+    margin: 5px;
+    padding: 3px;
+    text-align: center;
+    width: 30px;
+    font-size: 18px;
+  }
+/*  
+  .advancedDemo .dropzone .container-element {
+    margin: 10px;
+  }*/
+  
+  .close {
+    position: relative;
+    float: right;
+    color: #AA0114;
+    top: -18px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+
+
+/* Test Result GUI CSS End Here */
+
+.success {
+  color:#266236;
+}
+.error {
+  color:#BF0000;
+}
+.fa-15px {
+  font-size: 15px;
+}
+
+.padding-Left-4{
+  padding-left: 4% !important;
+}
+
+.padding-Left-9{
+  padding-left: 9%;
+}
+
+
+/* specimens Css start*/
+.l-1-grey{
+background-color: #d9d9d9;
+}
+
+.l-2-grey{
+background-color: #d9d9d9;
+}
+
+.border-none{
+  border-left: 0px;
+  border-right: 0px;
+}
+
+/* specimens Css End*/

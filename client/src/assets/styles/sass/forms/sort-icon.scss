@@ -1,0 +1,60 @@
+.sort-icon {
+  display: inline-block;
+  $color: $normal-blue;
+  $muted: $heavy-gray;
+  $transition: 0.2s;
+  cursor: pointer;
+
+  &::before {
+    display: block;
+    width: 0;
+    height: 0;
+    content: " ";
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    transition: $transition;
+
+    border-bottom: 8px solid $color;
+    margin-bottom: 2px;
+  }
+
+  &::after {
+    display: block;
+    width: 0;
+    height: 0;
+    content: " ";
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    transition: $transition;
+
+    border-top: 8px solid $color;
+  }
+
+  &.up::after {
+    border-top: 5px solid $muted;
+  }
+
+  &.up:hover {
+    &::after {
+      border-top: 5px solid $color;
+    }
+    &::before {
+      border-bottom: 5px solid $muted;
+    }
+  }
+
+  &.down::before {
+    border-bottom: 5px solid $muted;
+  }
+  &:hover, &.down:hover {
+    &::after {
+      border-top: 5px solid $muted;
+    }
+    &::before {
+      border-bottom: 5px solid $color;
+    }
+  }
+}
+/*
+<span class="noselect">{{value.header}} <i class="sort-icon"> </i> </span>
+*/

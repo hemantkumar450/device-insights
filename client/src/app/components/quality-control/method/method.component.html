@@ -1,0 +1,105 @@
+<p-growl [(value)]="errorMsg" [immutable]="false" life="7000"></p-growl>
+<div class="flex-block site-content">
+  <quality-control-left-navbar></quality-control-left-navbar>
+  <div class="main-content">
+    <div class="content" scroll-bar>
+      <error></error>
+
+      <div class="flex-block">
+        <div class="block grow-12"></div>
+        <div class="block grow-100 m-r-10 edit-mode">
+          <div class="content-block flex-block flex-wrap">
+            <div class="labeled-block block grow-25 offset-right">
+              <div class="label">Instrument</div>
+              <div class="value">
+                <p-dropdown appendTo="body" [filter]="true" name="instruments" placeholder='Please Select' [(ngModel)]="instrumentId" [options]="instruments"
+                  (onChange)=getQualityControlMethods()></p-dropdown>
+              </div>
+            </div>
+            <div class="labeled-block block grow-25 offset-right" *ngIf="isAdd">
+              <div class="label">Add Method Name</div>
+              <div class="value">
+                <input [(ngModel)]="method.METHOD_NAME" name="Instrument" maxlength="15" class="field" />
+              </div>
+            </div>
+            <div class="labeled-block block grow-10 offset-right" *ngIf="isAdd">
+              <div class="value">
+                <button style="margin-top: 15px;" type="submit" class="btn btn-dark h-50 m-l-20" (click)="saveQualityControlMethod(method)">Save</button>
+              </div>
+            </div>
+            <div class="labeled-block block grow-10 offset-right" *ngIf="isAdd">
+              <div class="value">
+                <button style="margin-top: 15px;" type="submit" class="btn btn-dark h-50 m-l-20" (click)="cancel()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-block">
+        <div class="block grow-10"></div>
+        <div class="titled-block block grow-70">
+          <p-dataTable [value]="methods" scrollable="true" [paginator]="false" [rows]="pageSize" [responsive]="true" (onSort)="onSorting($event)"
+            (onFilter)="onFiltering($event)" scrollHeight="380px">
+
+            <p-column field="METHOD_ID" header="Level Id" [style]="{'width':'25%'}">
+              <ng-template let-method="rowData" pTemplate="body">
+                {{method.METHOD_ID}}
+              </ng-template>
+            </p-column>
+
+            <p-column field="METHOD_NAME" header="Level Name" [sortable]="true" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search"
+              [style]="{'width':'65%'}">
+              <ng-template let-method="rowData" pTemplate="body">
+                <input class="form-control help-block text-danger" maxlength="50" OnlyEntityName="true" *ngIf="method.isEdit == true || method.METHOD_ID == 0"
+                  type="text" [(ngModel)]="method.METHOD_NAME" />
+                <span *ngIf="method.isEdit == false && method.METHOD_ID != 0">{{method.METHOD_NAME}}</span>
+              </ng-template>
+            </p-column>
+
+            <p-column styleClass="col-button" [style]="{'width':'130px'}" header="Actions" [style]="{'width':'20%'}" *ngIf="isAdmin">
+              <ng-template let-method="rowData" pTemplate="body">
+                <div>
+                  <span style="color: green;" *ngIf="method.isEdit == true" pTooltip="Save" class="cursor-pointer" (click)="saveQualityControlMethod(method)">
+                    <i class="fa fa-floppy-o fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+
+                  <span *ngIf="method.METHOD_ID != 0 && method.isEdit != true" class="cursor-pointer" (click)="editMethod(method)">
+                    <i class="fa fa-pencil fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+                  <span>|</span>
+
+                  <span style="color: red;" *ngIf="method.isEdit == true" pTooltip="Cancel" class="cursor-pointer" (click)="cancelMethod(method)">
+                    <i class="fa fa-times fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+
+                  <span *ngIf="method.METHOD_ID != 0 && method.isEdit != true" class="cursor-pointer" (click)="deleteMethod(method)">
+                    <i class="fa fa-trash fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </ng-template>
+            </p-column>
+
+          </p-dataTable>
+          <p-paginator [hidden]="totalRecords<pageSize" [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="pageChanged($event)"></p-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer site-container">
+  <div class="flex-block space-between">
+    <div class="flex-block">
+    </div>
+    <div class="flex-block block">
+      <div class="block" style="margin-top:1%">
+        <h1 style="color:white">Total Methods: {{totalRecords}}</h1>
+      </div>
+      <div class="delim m-l-30" *ngIf="isAdmin"></div>
+      <a class="btn btn-light h-50 m-l-20" (click)="addMethod()" *ngIf="isAdmin">Add Method</a>
+    </div>
+  </div>
+</footer>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

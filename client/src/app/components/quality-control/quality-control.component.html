@@ -1,0 +1,25 @@
+<p-growl [(value)]="errorMessage" [immutable]="false" life="7000"></p-growl>
+<div class="flex-block site-content">
+  <quality-control-left-navbar></quality-control-left-navbar>
+  <div class="main-content">
+    <div class="content" scroll-bar>
+      <div class="flex-block">
+        <div class="titled-block block grow-100 m-r-20">
+          <div class="title">LJ Chart
+            <button type="submit" class="btn btn-dark h-50 m-l-20" (click)="printLJChartEvent()" style="margin-left: 1100px;">Print</button>
+          </div>
+          <div class="content-block flex-block flex-wrap" style="text-align:left">
+            <div id="pbi-report" style="width: 1300px;height: 620px;" align="center"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer site-container">
+  <div class="flex-block space-between">
+    <div class="flex-block"></div>
+    <div class="flex-block block">
+    </div>
+  </div>
+</footer>

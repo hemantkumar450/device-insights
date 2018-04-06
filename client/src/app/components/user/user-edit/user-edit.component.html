@@ -1,0 +1,191 @@
+<p-growl [(value)]="errorMsg" [immutable]="false" life="7000"></p-growl>
+<form #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
+  <div class="flex-block site-content">
+    <user-left-navbar></user-left-navbar>
+    <div class="main-content">
+      <div class="content" scroll-bar>
+        <error></error>
+        <div class="flex-block">
+          <div class="titled-block block grow-50 m-r-20 edit-mode">
+            <div class="title">User Basic Info
+              <div style="float:right" *ngIf="user.USER_ID != 0">Is Active
+                <p-checkbox name="groupname" label="" binary="true" [(ngModel)]="user.IS_ACTIVE"></p-checkbox>
+              </div>
+            </div>
+            <div class="content-block flex-block flex-wrap">
+              <div class="labeled-block block grow-100 offset-right">
+                <div class="label required">First Name</div>
+                <div class="value">
+                  <input [(ngModel)]="user.FIRST_NAME" nameRestriction="true" maxlength="50" name="FirstName" #FirstNameValidate="ngModel"
+                    required class="field" />
+                </div>
+                <div [hidden]="FirstNameValidate.pristine && !f.submitted && FirstNameValidate.untouched">
+                  <div *ngIf="FirstNameValidate.errors && FirstNameValidate.errors.required" class="text-danger">
+                    First Name is required
+                  </div>
+                </div>
+              </div>
+              <div class="labeled-block block grow-100 offset-right">
+                <div class="label">Middle Name</div>
+                <div class="value">
+                  <input [(ngModel)]="user.MIDDLE_NAME" name="MiddleName" #nameValidate="ngModel" required maxlength="50" OnlyAlphaNumeric="true"
+                    class="field" />
+                </div>
+              </div>
+              <div class="labeled-block block grow-100 offset-right edit-mode ">
+                <div class="label ">Last Name</div>
+                <div class="value">
+                  <input [(ngModel)]="user.LAST_NAME" name="LastName" #phoneValidate="ngModel" required maxlength="50" OnlyAlphaNumeric="true"
+                    class="field" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="titled-block block grow-50 m-r-20 edit-mode">
+            <div class="title" *ngIf="user.USER_ID == 0">Create Security</div>
+            <div class="title" *ngIf="user.USER_ID != 0">Update Security</div>
+            <div class="content-block flex-block flex-wrap">
+              <div class="labeled-block block grow-100 offset-right">
+                <div class="label required">Email</div>
+                <div class="value">
+                  <input [disabled]="user.USER_ID != 0" [(ngModel)]="user.EMAIL_ID" name="contactemail" maxlength="50" class="field" #contactemail="ngModel"
+                    required (blur)="emailValidate()" emailValidate="true" (keydown)="emailCheckHandler($event)" />
+                </div>
+                <div [hidden]="contactemail.pristine && !f.submitted && contactemail.untouched">
+                  <div *ngIf="contactemail.errors && contactemail.errors.required" class="text-danger">
+                    Email is required
+                  </div>
+                </div>
+                <div *ngIf="isEmailValid" class="text-danger">
+                  Email is invalid
+                </div>
+                <div class="text-danger" *ngIf="isEmailExist">
+                  Email already exists
+                </div>
+              </div>
+              <div class="labeled-block block grow-50 offset-right edit-mode">
+                <div class="label ">Password</div>
+                <div class="value">
+                  <input type="password" name="Password" maxlength="20" [(ngModel)]="user.PASSWORD" #password="ngModel" class="field" minlength="4"
+                    maxlength="20" passwordValidate="true" />
+                  <div [hidden]="password.valid || password.untouched" class="text-danger">
+                    <div *ngIf="password.errors && (password.errors.required || password.errors.minlength)" class="text-danger">
+                      Password is mandatory(for new user), and it should be a minimum of 4 characters. You could use only '@','!','#','$','_','%','&'
+                      these special characters.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="labeled-block block grow-50 offset-right edit-mode">
+                <div class="label ">Confirm Password</div>
+                <div class="value">
+                  <input type="password" name="ConfirmPassword" maxlength="50" [(ngModel)]="user.CONFIRM_PASSWORD" class="field" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-block" *ngIf="!isSuperAdminLogin">
+          <div class="titled-block block grow-70 m-r-10">
+            <div class="title">User Type</div>
+            <div class="content-block flex-block flex-wrap grow-1">
+              <div class="labeled-block block grow-15 offset-right">
+                <div class="value">
+                  <p-radioButton label="Lab User" name="User" value="4" [(ngModel)]="userRoleId" (click)="setUserRole(false)"></p-radioButton>
+                </div>
+              </div>
+              <div class="labeled-block block grow-16 offset-right">
+                <div class="value" *ngIf="currentUser.roleId !== 4">
+                  <p-radioButton label="Lab Admin" name="Lab Admin" value="3" [(ngModel)]="userRoleId" (click)="setUserRole(false)"></p-radioButton>
+                </div>
+              </div>
+              <div class="labeled-block block grow-21 offset-right">
+                <div class="value" *ngIf="!isGetUserByAppAdmin && (currentUser.roleId === 2 || currentUser.roleId === 1)">
+                  <p-radioButton label="Super Admin" name="Super Admin" value="2" [(ngModel)]="userRoleId" (click)="setUserRole(false)"></p-radioButton>
+                </div>
+              </div>
+              <div class="labeled-block block grow-16 offset-right">
+                <div class="value" *ngIf="!isGetUserByAppAdmin && (currentUser.roleId === 1)">
+                  <p-radioButton label="Super User" name="Super User" value="5" [(ngModel)]="userRoleId" (click)="setUserRole(false)"></p-radioButton>
+                </div>
+              </div>
+              <div class="labeled-block block grow-25 offset-right">
+                <div class="value" *ngIf="!isGetUserByAppAdmin && (currentUser.roleId === 1)">
+                  <p-radioButton label="Application Admin" name="Application Admin" value="1" [(ngModel)]="userRoleId" (click)="setUserRole(false)"></p-radioButton>
+                </div>
+              </div>
+              <div class="labeled-block block grow-30 offset-right" *ngIf="!isGetUserByAppAdmin && (currentUser.roleId !== 3 && currentUser.roleId !== 4)">
+                <p-dropdown #dropDownThing *ngIf="user.RoleId === 3 || user.RoleId === 4" [filter]="true" name="labList" placeholder='Please Select'
+                  [(ngModel)]="user.LabId" [options]="labList"></p-dropdown>
+              </div>
+
+              <div class="labeled-block block grow-50 offset-right" *ngIf="!isGetUserByAppAdmin && (currentUser.roleId !== 3 && currentUser.roleId !== 4)">
+                <angular2-multiselect [disabled]="isSuperAdminLogin" class="superUser" *ngIf="user.RoleId === 2 || user.RoleId === 5" name="filteredLabsMultiple"
+                  [data]="superLabList" [(ngModel)]="labIds" [settings]="dropdownSettings"></angular2-multiselect>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="titled-block block grow-30 m-r-10 edit-mode">
+            <div class="title">User Profile Photo
+              <!-- -->
+            </div>
+            <div class="content-block flex-block flex-wrap">
+              <div class="labeled-block block grow-1 offset-right">
+                <div class="label">Select Icon</div>
+                <div class="value">
+                  <input #myInput id="file-upload" name="SelectIcon" type="file" (change)="imageUploadEvent($event)" accept="image/*" />
+                </div>
+              </div>
+              <div class="labeled-block block grow-30 offset-right" *ngIf="user.ICON">
+                <div class="label"></div>
+                <div class="value">
+                  <img [src]="user.ICON" name="Image" style="width:100%;height: 60px;" class="thumbnail">
+                </div>
+              </div>
+              <div class="labeled-block block grow-40 offset-right" *ngIf="user.ICON">
+                <button pButton type="button" (click)="deleteIcon()" icon="fa-times" style="height: 15px;width: 30px;border: none !important;background-color: #d0d7df"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="flex-block" *ngIf="isSuperAdminLogin">
+          <div class="titled-block block grow-49 m-r-10 edit-mode">
+            <div class="title">User Profile Photo</div>
+            <div class="content-block flex-block flex-wrap">
+              <div class="labeled-block block grow-70 offset-right">
+                <div class="label">Select Icon</div>
+                <div class="value">
+                  <input #myInput id="file-upload" name="SelectIcon" type="file" (change)="imageUploadEvent($event)" accept="image/*" />
+                </div>
+              </div>
+              <div class="labeled-block block grow-30 offset-right">
+                <div class="label"></div>
+                <div class="value" *ngIf="user.Icon">
+                  <img [src]="user.Icon" name="Image" style="width:100%;height: 60px;" class="thumbnail">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer class="footer site-container">
+    <div class="flex-block space-between">
+      <div class="flex-block">
+      </div>
+      <div class="flex-block block">
+        <button type="submit" class="btn btn-light h-50 m-l-20">Save</button>
+        <button type="submit" class="btn btn-light h-50 m-l-20" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </footer>
+</form>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

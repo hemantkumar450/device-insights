@@ -1,0 +1,17 @@
+.superUser{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid #164f86;
+  color: #1e384f;
+  background: #ebebeb !important;
+  margin: 0;
+  font-size: 1.04vw;
+  line-height: 1.8vw;
+  height: 2.6vw;
+  text-align: left;
+  padding: 0 0 0 5px;
+  width: 100% !important;
+  transition: all 0.2s;
+}

@@ -1,0 +1,30 @@
+<p-growl [value]="errorMsg" [immutable]="false" life="7000"></p-growl>
+<div class="top">
+  <div class="top__in" style="padding-top: 25px">
+    <a href="http://molecularinsights.io/" class="top__logo">
+        <img src="./assets/images/logo.png" alt="" style="height: 70px;"></a>
+  </div>
+</div>
+<div class="login-screen">
+  <div class="flex-block flex-column align-center">
+    <div class="block p-t-10">
+      <div class="title">
+
+      </div>
+    </div>
+    <div class="block p-t-10">
+      <input type="text" class="field w-320" placeholder="username or email" [(ngModel)]="forgotPassword.Email" />
+    </div>
+
+    <div class="block p-t-10">
+      <button class="btn w-320 h-60" (click)="sendLink()">Reset Password</button>
+    </div>
+    <div class="block p-t-10">
+      <button class="btn w-320 h-60" (click)="cancel()">Go Back</button>
+    </div>
+  </div>
+  <div class="login-footer">
+    <a href="tel:614-495-0260" class="phone">614-495-0260</a> |
+    <a href="#" class="email">deviceinsights.io</a>
+  </div>
+</div>

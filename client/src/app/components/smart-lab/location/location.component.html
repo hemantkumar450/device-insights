@@ -1,0 +1,66 @@
+<p-growl [(value)]="errorMsg" [immutable]="false" life="7000"></p-growl>
+<div class="flex-block site-content">
+  <smart-lab-left-navbar></smart-lab-left-navbar>
+  <div class="main-content">
+    <div class="content" scroll-bar>
+      <error></error>
+      <div class="flex-block">
+        <div class="block grow-20"></div>
+        <div class="titled-block block grow-50">
+          <p-dataTable [value]="locations" scrollable="true" [paginator]="false" [rows]="pageSize" [responsive]="true" (onSort)="onSorting($event)"
+            (onFilter)="onFiltering($event)">
+            <p-column field="LOCATION_NAME" header="Location Name" [sortable]="true" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search">
+              <ng-template let-location="rowData" pTemplate="body">
+                <input class="form-control help-block text-danger" maxlength="50" OnlyEntityName="true" *ngIf="location.isEdit == true || location.LOCATION_ID == 0"
+                  type="text" [(ngModel)]="location.LOCATION_NAME" />
+                <span *ngIf="location.isEdit == false && location.LOCATION_ID != 0">{{location.LOCATION_NAME}}</span>
+              </ng-template>
+            </p-column>
+
+            <p-column styleClass="col-button" [style]="{'width':'130px'}" header="Actions" *ngIf="isLabAdmin || isAppAdmin">
+              <ng-template let-compound="rowData" pTemplate="body">
+                <div>
+                  <span *ngIf="(compound.LOCATION_ID == 0 || compound.isEdit == true)" pTooltip="Save" class="cursor-pointer" (click)="saveLocation(compound)">
+                    <i class="fa fa-floppy-o fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+
+                  <span *ngIf="(compound.LOCATION_ID != 0 && compound.isEdit != true)" class="cursor-pointer" (click)="editLocation(compound)">
+                    <i class="fa fa-pencil fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+                  <span *ngIf="isAppAdmin">|</span>
+
+                  <span *ngIf="compound.LOCATION_ID == 0 || compound.isEdit == true" pTooltip="Cancel" class="cursor-pointer" (click)="cancelLocation(compound)">
+                    <i class="fa fa-times fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+
+                  <span *ngIf="compound.LOCATION_ID != 0 && compound.isEdit != true && isAppAdmin" class="cursor-pointer" (click)="deleteLocation(compound)">
+                    <i class="fa fa-trash fa-md m3 m6 edit" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </ng-template>
+            </p-column>
+          </p-dataTable>
+          <p-paginator [hidden]="totalRecords<pageSize" [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="pageChanged($event)"></p-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer site-container">
+  <div class="flex-block space-between">
+    <div class="flex-block">
+      <!--pagination here-->
+    </div>
+    <div class="flex-block block">
+      <div class="block" style="margin-top:1%">
+        <h1 style="color:white">Total Locations: {{totalRecords}}</h1>
+      </div>
+      <div class="delim m-l-30" *ngIf="isAppAdmin"></div>
+      <a *ngIf="isAppAdmin" class="btn btn-light h-50 m-l-20" (click)="addLocation()">Add Location</a>
+    </div>
+  </div>
+</footer>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
